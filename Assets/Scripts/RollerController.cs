@@ -41,6 +41,8 @@ public class RollerController : MonoBehaviour
         }
         rb.velocity = new Vector3(currentVelocity, rb.velocity.y, rb.velocity.z);
         rb.angularVelocity = new Vector3(0.0f, 0.0f, -currentVelocity);
+        // Lock z position
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
