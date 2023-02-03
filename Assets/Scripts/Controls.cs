@@ -25,9 +25,14 @@ public class Controls : MonoBehaviour
                 playerController.MoveDirection(true, Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
                 playerController.ShootProjectile();
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                playerController.Jump();
             }
         }
     }

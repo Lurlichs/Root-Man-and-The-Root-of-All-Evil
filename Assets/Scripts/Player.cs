@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     [Header("Modifyable Constants")]
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
-    [SerializeField] private float groundDrag;
+    [SerializeField] private float airDrag;
 
     [SerializeField] private float invulnerabilityTime;
     [SerializeField] private float rootWaveCooldown;
@@ -32,6 +32,10 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float projectileDamage;
     [SerializeField] private float projectileSpeed;
+
+    [SerializeField] private float jumpPower;
+    [SerializeField] private float gravityMultiplier;
+    [SerializeField] private float gravityMultiplierFalling;
 
     [Header("Object")]
     [SerializeField] private GameObject player;
@@ -65,6 +69,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int currentHealth;
     [SerializeField] private bool facingLeft;
 
+    [SerializeField] private float currentSpeed;
+
     [SerializeField] private float currentProjectileCooldown;
     [SerializeField] private float currentInvulnerabilityTime;
     [SerializeField] private float currentRootWaveCooldown;
@@ -72,6 +78,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private LayerMask ground;
     [SerializeField] private bool grounded;
+
+    [SerializeField] private bool doubleJumpAvailable;
 
 
     /*[Header("Behind the scenes stuff")]
@@ -97,7 +105,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (currentRootWaveCooldown > 0)
+        if (currentRootWaveCooldown > 0 && GetPowerByName("rootWave").currentlyActive)
         {
             currentRootWaveCooldown -= time;
 
@@ -107,17 +115,18 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (currentRegenerationCooldown > 0)
+        if (currentRegenerationCooldown > 0 && GetPowerByName("regen").currentlyActive)
         {
             currentRegenerationCooldown -= time;
 
             if (currentRegenerationCooldown <= 0)
             {
                 currentRegenerationCooldown = 0;
+                RegenHealth();
             }
         }
 
-        if (currentProjectileCooldown > 0)
+        if (currentProjectileCooldown > 0 && GetPowerByName("projectile").currentlyActive)
         {
             currentProjectileCooldown -= time;
 
@@ -125,6 +134,27 @@ public class Player : MonoBehaviour
             {
                 currentProjectileCooldown = 0;
             }
+        }
+
+        if (Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.15f, ground))
+        {
+            grounded = true;
+            doubleJumpAvailable = true;
+            currentSpeed = speed;
+        }
+        else
+        {
+            grounded = false;
+            currentSpeed = speed / airDrag;
+        }
+
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier + gravityMultiplierFalling - 1) * Time.deltaTime;
+        }
+        else if(rb.velocity.y > 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -142,30 +172,17 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void ResetVariables()
-    {
-        
-    }
-
     public void MoveDirection(bool left, float deltaTime)
     {
-        /*
-        Vector3 direction = new Vector3(xAxis, 0, 0).normalized;
-
-        if(direction.magnitude >= 0.1)
-        {
-            rb.AddForce(direction * speed, ForceMode.Force);
-        }*/
-
         if (left)
         {
             facingLeft = true;
-            transform.position = new Vector3(transform.position.x - speed * deltaTime, transform.position.y);
+            transform.position = new Vector3(transform.position.x - currentSpeed * deltaTime, transform.position.y);
         }
         else
         {
             facingLeft = false;
-            transform.position = new Vector3(transform.position.x + speed * deltaTime, transform.position.y);
+            transform.position = new Vector3(transform.position.x + currentSpeed * deltaTime, transform.position.y);
         }
 
         
@@ -190,6 +207,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Jump()
+    {
+        if (grounded)
+        {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        }
+        else if (doubleJumpAvailable && GetPowerByName("doubleJump").currentlyActive)
+        {
+            rb.velocity = new Vector3();
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            doubleJumpAvailable = false;
+        }
+        else
+        {
+            // Don't jump
+        }
+    }
+
     public void Die()
     {
 
@@ -197,20 +232,27 @@ public class Player : MonoBehaviour
 
     public void RegenHealth()
     {
-
+        if(currentHealth < maxHealth)
+        {
+            currentHealth++;
+            currentRegenerationCooldown = regenerationCooldown;
+        }
     }
 
     public void TakeDamage()
     {
-        currentHealth--;
-
-        if(currentHealth <= 0)
+        if(currentInvulnerabilityTime == 0)
         {
-            Die();
-        }
+            currentHealth--;
 
-        // Else
-        // TODO: Enter invulnerability state for a bit like cuphead
+            if (currentHealth <= 0)
+            {
+                Die();
+                return;
+            }
+
+            currentInvulnerabilityTime = invulnerabilityTime;
+        }
     }
 
     public void DisablePower(int id)
