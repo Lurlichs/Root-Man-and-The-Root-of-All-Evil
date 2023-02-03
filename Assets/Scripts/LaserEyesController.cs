@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Attacks by starting with a laser pointing away from the player, then sweeping
+// towards the camera to "chop" the player
 public class LaserEyesController : MonoBehaviour
 {
     public float attackFrequency = 10.0f;
+    [Tooltip("Maximum degrees per second for the sweep")]
     public float maxAngularSpeed = 360.0f;
+    [Tooltip("Maximum degrees per second per second for the sweep acceleration")]
     public float angularAcceleration = 360.0f;
+    [Tooltip("How long the laser stays still pointing away from the player, also how long it lingers in the player direction")]
     public float laserBeamLinger = 0.2f;
+    [Tooltip("Put the LaserBeam prefab here")]
+    public GameObject laserBeamPrefab;
 
     private float lastAttack;
     private bool preAttackLinger;
@@ -20,7 +27,6 @@ public class LaserEyesController : MonoBehaviour
     private float preAttackLingerStart;
     private float laserBeamReachedTarget;
 
-    public GameObject laserBeamPrefab;
     public GameObject laserBeam;
 
     void SetTarget(Transform desiredTarget)
@@ -36,7 +42,6 @@ public class LaserEyesController : MonoBehaviour
 
     private void EndSweep()
     {
-        Debug.Log("End sweep");
         if (sweepRight)
         {
             sweepAngle = -180.0f;

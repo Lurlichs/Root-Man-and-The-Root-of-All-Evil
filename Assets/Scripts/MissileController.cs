@@ -7,13 +7,16 @@ public class MissileController : MonoBehaviour
 {
     public float attackFrequency = 10.0f;
     public float preAttackSpeed = 10.0f;
-    public float minAngle = 20.0f;
-    public float maxAngle = 60.0f;
+    public float attackSpeed = 20.0f;
+    public float preAttackHeightMin = 5.0f;
+    public float preAttackHeightMax = 15.0f;
 
     private float lastAttack;
     private Rigidbody rb;
     private bool inPreAttack;
     private bool inAttack;
+    private float preAttackHeight;
+    private float attackAngle; // in radian
     public Transform target;
 
     // Start is called before the first frame update
@@ -34,15 +37,6 @@ public class MissileController : MonoBehaviour
         target = desiredTarget;
     }
 
-    // Calculates the speed of a launch required to hit a target at requiredXDifference
-    // from the launcher, when angled at angle (in degrees)
-    private float CalculateLaunchSpeed(float requiredXDifference, float angle)
-    {
-        float angleRadian = angle * Mathf.Deg2Rad;
-        float gravity = Mathf.Abs(Physics.gravity.y);
-        return Mathf.Sqrt(requiredXDifference * gravity / (2 * Mathf.Cos(angleRadian) * Mathf.Sin(angleRadian)));
-    }
-
     void FixedUpdate()
     {
         bool startAttack = false;
@@ -52,40 +46,30 @@ public class MissileController : MonoBehaviour
         {
             lastAttack = Time.fixedTime;
             // Launch a new attack
-            if (target.position.y >= (transform.position.y + 0.5f))
-            {
-                // Need a preattack where it launches into the air up to the height of the target
-                inPreAttack = true;
-            }
-            else
-            {
-                startAttack = true;
-            }
-            
-            // Go a bit into the air to avoid colliding with the floor
+            inPreAttack = true;
+            // Go higher than both current height and target
+            float yBase = Mathf.Max(transform.position.y, target.position.y);
+            preAttackHeight = yBase + Random.Range(preAttackHeightMin, preAttackHeightMax);
+            // Start a bit into the air to avoid colliding with the floor
             transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, 0.0f);
         }
         if (inPreAttack)
         {
             rb.velocity = new Vector3(0.0f, preAttackSpeed, 0.0f);
-            if (target.position.y <= transform.position.y)
+            if (transform.position.y >= preAttackHeight)
             {
                 // Up to required, height, start real attack
                 startAttack = true;
                 inPreAttack = false;
+                // Set attack angle to head to where player is now
+                // Actually aim a little bit high
+                attackAngle = Mathf.Atan2(target.position.y - transform.position.y + 1.0f, target.position.x - transform.position.x);
             }
         }
         if (startAttack)
         {
             lastAttack = Time.fixedTime; // reset attack interval
-            float angle = Random.Range(minAngle, maxAngle);
-            if (target.position.x < transform.position.x)
-            {
-                // Launch towards left
-                angle = 180.0f - angle;
-            }
-            float speed = CalculateLaunchSpeed(target.position.x - transform.position.x, angle);
-            rb.velocity = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * speed, Mathf.Sin(angle * Mathf.Deg2Rad) * speed, 0.0f);
+            rb.velocity = new Vector3(Mathf.Cos(attackAngle) * attackSpeed, Mathf.Sin(attackAngle) * attackSpeed, 0.0f);
             inAttack = true;
         }
         // Lock z position
