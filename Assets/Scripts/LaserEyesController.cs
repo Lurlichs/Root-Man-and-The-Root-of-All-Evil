@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Attacks by starting with a laser pointing away from the player, then sweeping
 // towards the camera to "chop" the player
-public class LaserEyesController : MonoBehaviour
+public class LaserEyesController : Enemy
 {
     enum States
     {
@@ -38,8 +38,6 @@ public class LaserEyesController : MonoBehaviour
     [Tooltip("Layer mask to use when checking if this enemy can see the player - make sure you exclude Enemy")]
     public LayerMask layerMask;
 
-    public Transform target;
-
     private Rigidbody rb;
     private Animator animator;
 
@@ -54,18 +52,13 @@ public class LaserEyesController : MonoBehaviour
 
     private GameObject laserBeam;
 
-    void SetTarget(Transform desiredTarget)
-    {
-        target = desiredTarget;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         // Default to targeting the player
-        if (target == null)
+        if (player == null)
         {
-            target = FindObjectOfType<Player>().transform;
+            player = FindObjectOfType<Player>();
         }
         rb = GetComponent<Rigidbody>();
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
@@ -97,11 +90,11 @@ public class LaserEyesController : MonoBehaviour
     {
         RaycastHit hitInfo;
         Vector3 lookPos = new Vector3(transform.position.x, onionEye.position.y, transform.position.z);
-        Vector3 direction = (target.position - lookPos).normalized;
+        Vector3 direction = (player.transform.position - lookPos).normalized;
         //Debug.DrawLine(lookPos, lookPos + direction);
         if (Physics.Raycast(lookPos, direction, out hitInfo, layerMask))
         {
-            if (hitInfo.transform == target)
+            if (hitInfo.transform == player.transform)
             {
                 return true;
             }
@@ -161,7 +154,7 @@ public class LaserEyesController : MonoBehaviour
                 // Run away!
                 lastStateTransition = Time.fixedTime;
                 currentState = States.AVOID;
-                if (target.position.x > transform.position.x)
+                if (player.transform.position.x > transform.position.x)
                 {
                     moveRight = false;
                 }
@@ -174,7 +167,7 @@ public class LaserEyesController : MonoBehaviour
         }
         else if (currentState == States.AVOID)
         {
-            if (target.position.x > transform.position.x)
+            if (player.transform.position.x > transform.position.x)
             {
                 moveRight = false;
             }
@@ -195,7 +188,7 @@ public class LaserEyesController : MonoBehaviour
             if (CanSeePlayer())
             {
                 //Debug.DrawLine(target.position, onionEye.position);
-                if (Mathf.Abs(target.position.y - onionEye.position.y) <= yThreshold)
+                if (Mathf.Abs(player.transform.position.y - onionEye.position.y) <= yThreshold)
                 {
                     // Player is at the same level, attack!
                     animator.ResetTrigger("StartWalking");
