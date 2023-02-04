@@ -1239,6 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intermissionDuration: 5
+  player: {fileID: 1552674375}
   stageNumber: 0
   waves:
   - spawns:

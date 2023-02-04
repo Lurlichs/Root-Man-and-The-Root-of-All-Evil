@@ -19,6 +19,7 @@ public class StageController : MonoBehaviour
 {
     [Header("Constants")]
     [SerializeField] public float intermissionDuration;
+    [SerializeField] private Player player;
 
     [Header("Stage info")]
     public int stageNumber;
@@ -48,6 +49,7 @@ public class StageController : MonoBehaviour
             {
                 GameObject spawnedEnemy = Instantiate(spawn.enemy);
                 spawnedEnemy.transform.position = spawn.spawnPos;
+                spawnedEnemy.GetComponent<Enemy>().Setup(player);
                 livingEnemies.Add(spawnedEnemy);
             }
         }

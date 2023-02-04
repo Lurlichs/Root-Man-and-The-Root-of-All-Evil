@@ -5,13 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health;
+    [SerializeField] private Player player;
 
     /// <summary>
     /// Use if necessary
     /// </summary>
-    public void Setup(float health)
+    public void Setup(Player player)
     {
-        this.health = health;
+        this.player = player;
     }
 
     public void TakeDamage(float damage)
