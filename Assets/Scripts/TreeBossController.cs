@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TreeBossController : MonoBehaviour
 {
+
+    public GameObject spike, root;
+
     enum States
     {
         IDLE,
@@ -83,6 +86,11 @@ public class TreeBossController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SpikeWave()
+    {
+        print("hello");
     }
         
     }
