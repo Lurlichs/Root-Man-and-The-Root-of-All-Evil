@@ -43,6 +43,11 @@ public class MissileController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Default to targeting the player
+        if (target == null)
+        {
+            target = FindObjectOfType<Player>().transform;
+        }
         rb = GetComponent<Rigidbody>();
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
@@ -118,7 +123,6 @@ public class MissileController : MonoBehaviour
             rb.velocity = new Vector3(Mathf.Cos(attackAngle) * boostedAttackSpeed, Mathf.Sin(attackAngle) * boostedAttackSpeed, 0.0f);
         }
         // Lock z position
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
         if (currentState == States.RISING)
         {
             // Point in opposite of direction of travel
@@ -128,11 +132,6 @@ public class MissileController : MonoBehaviour
         {
             // Point in direction of travel
             transform.right = rb.velocity.normalized;
-        }
-        else
-        {
-            // Only rotate on one axis
-            rb.angularVelocity = new Vector3(0.0f, 0.0f, rb.angularVelocity.z);
         }
     }
 
