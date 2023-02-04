@@ -136,10 +136,12 @@ public class UI_Manager : MonoBehaviour
     public void TurnOnVictoryPanel()
     {
         victoryPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
     public void TurnOffVictoryPanel()
     {
         victoryPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region remove ability button functions
