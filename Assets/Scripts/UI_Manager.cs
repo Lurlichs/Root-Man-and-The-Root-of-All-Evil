@@ -37,6 +37,10 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject rootWaveX;
     [SerializeField] private GameObject shieldX;
 
+    [Header("Pause panel")]
+    private bool isPaused;
+    [SerializeField] private GameObject pausePanel;
+
     [Header("Death Panel")]
     public GameObject deathPanel;
 
@@ -68,6 +72,8 @@ public class UI_Manager : MonoBehaviour
         {
             bossBarCG.alpha -= 0.5f * Time.deltaTime;
         }
+
+        PauseResumeToggle();
     }
 
     public void UpdateHealthSetup()
@@ -155,6 +161,41 @@ public class UI_Manager : MonoBehaviour
         fadeBossBarNow = false;
     }
     #endregion
+
+    public void PauseResumeToggle()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+            if (isPaused)
+            {
+                isPaused = true;
+                Pause();
+            }
+            else
+            {
+                isPaused = false;
+                Resume();
+            }
+        }
+    }
+
+    public void Resume()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void Pause()
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        isPaused = true;
+
+    }
 
     public void TurnOnDeathScreen()
     {
