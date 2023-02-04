@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool grounded;
 
     [SerializeField] private bool doubleJumpAvailable;
+    public bool activatingShield;
 
 
     /*[Header("Behind the scenes stuff")]
@@ -184,8 +185,17 @@ public class Player : MonoBehaviour
             facingLeft = false;
             transform.position = new Vector3(transform.position.x + currentSpeed * deltaTime, transform.position.y);
         }
+    }
 
-        
+    public void ActivateShield()
+    {
+        activatingShield = true;
+        // TODO : Effect
+    }
+
+    public void DeactivateShield()
+    {
+        activatingShield = false;
     }
 
     /// <summary>
@@ -241,7 +251,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
-        if(currentInvulnerabilityTime == 0)
+        if(currentInvulnerabilityTime == 0 && !activatingShield)
         {
             currentHealth--;
 
