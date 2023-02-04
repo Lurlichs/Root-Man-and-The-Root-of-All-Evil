@@ -11,9 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] public GameObject deathEffect;
 
-    /// <summary>
-    /// Use if necessary
-    /// </summary>
+        /// <summary>
+        /// Use if necessary
+        /// </summary>
     public void Setup(Player player, StageController stageController)
     {
         this.player = player;
@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        
+        UI_Manager.Instance.UpdateBossHealth(health);
 
         if (health <= 0)
         {
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
 
         GameObject spawnEffect = Instantiate(deathEffect);
         spawnEffect.transform.position = transform.position;
+
+        UI_Manager.Instance.FadeOutBossBar();
 
         Destroy(gameObject);
     }

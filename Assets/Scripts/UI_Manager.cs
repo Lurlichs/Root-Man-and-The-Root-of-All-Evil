@@ -79,33 +79,67 @@ public class UI_Manager : MonoBehaviour
         PauseResumeToggle();
     }
 
+    #region helth
     public void UpdateHealthSetup()
     {
-        if(player.currentHealth == 4)
+        if (player.currentHealth == 5)
+        {
+            healthLeaf5.SetActive(true);
+            healthLeaf4.SetActive(true);
+            healthLeaf3.SetActive(true);
+            healthLeaf2.SetActive(true);
+            healthLeaf1.SetActive(true);
+        }
+        if (player.currentHealth == 4)
         {
             healthLeaf5.SetActive(false);
+            healthLeaf4.SetActive(true);
+            healthLeaf3.SetActive(true);
+            healthLeaf2.SetActive(true);
+            healthLeaf1.SetActive(true);
         }
         if (player.currentHealth == 3)
         {
+            healthLeaf5.SetActive(false);
             healthLeaf4.SetActive(false);
+            healthLeaf3.SetActive(true);
+            healthLeaf2.SetActive(true);
+            healthLeaf1.SetActive(true);
         }
         if (player.currentHealth == 2)
         {
+            healthLeaf5.SetActive(false);
+            healthLeaf4.SetActive(false);
             healthLeaf3.SetActive(false);
+            healthLeaf2.SetActive(true);
+            healthLeaf1.SetActive(true);
         }
         if (player.currentHealth == 1)
         {
+            healthLeaf5.SetActive(false);
+            healthLeaf4.SetActive(false);
+            healthLeaf3.SetActive(false);
             healthLeaf2.SetActive(false);
+            healthLeaf1.SetActive(true);
         }
         if (player.currentHealth == 0)
         {
+            healthLeaf5.SetActive(false);
+            healthLeaf4.SetActive(false);
+            healthLeaf3.SetActive(false);
+            healthLeaf2.SetActive(false);
             healthLeaf1.SetActive(false);
         }
     }
+    #endregion
 
     public void TurnOnVictoryPanel()
     {
         victoryPanel.SetActive(true);
+    }
+    public void TurnOffVictoryPanel()
+    {
+        victoryPanel.SetActive(false);
     }
 
     #region remove ability button functions
@@ -113,35 +147,40 @@ public class UI_Manager : MonoBehaviour
     {
         regenX.SetActive(true);
         onScreenRegenX.SetActive(true);
-        // remove regen for the eplayer
+        player.DisablePower(1);
+        TurnOffVictoryPanel();
     }
 
     public void RemoveProjectile()
     {
         projectileX.SetActive(true);
         onScreenProjectileX.SetActive(true);
-        // remove projectile for thee player
+        player.DisablePower(2);
+        TurnOffVictoryPanel();
     }
 
     public void removeDoubleJump()
     {
         doubleJumpX.SetActive(true);
         onScreenDoubleJumpX.SetActive(true);
-        // remove double jump for the eplayer
+        player.DisablePower(3);
+        TurnOffVictoryPanel();
     }
 
     public void RemoveRootWave()
     {
         rootWaveX.SetActive(true);
         onScreenRootWaveX.SetActive(true);
-        // remove root wave for thee player
+        player.DisablePower(4);
+        TurnOffVictoryPanel();
     }
 
     public void RemoveShield()
     {
         shieldX.SetActive(true);
         onScreenShieldX.SetActive(true);
-        // remove shield for thee player
+        player.DisablePower(5);
+        TurnOffVictoryPanel();
     }
     #endregion
 

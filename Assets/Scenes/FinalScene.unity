@@ -1911,7 +1911,7 @@ MonoBehaviour:
   regenerationCooldown: 5
   projectileCooldown: 0.2
   playerHeight: 2
-  attackDamage: 100
+  attackDamage: 3
   projectileSpeed: 30
   meleeDistance: 1.6
   attackStateDuration: 0.2

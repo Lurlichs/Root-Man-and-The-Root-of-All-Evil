@@ -38,10 +38,18 @@ public class MissileController : Enemy
     private float preAttackHeight; // how high above the ground we've chosen to rise
     private float attackAngle; // in radian
 
+    [Header("Leave Blank if not a boss enemy")]
+    [SerializeField] private Bosses_ScriptableObj BossScObj;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(player == null)
+        if (BossScObj != null)
+        {
+            //health = BossScObj.baseHealth;
+            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+        }
+        if (player == null)
         {
             player = FindObjectOfType<Player>();
         }

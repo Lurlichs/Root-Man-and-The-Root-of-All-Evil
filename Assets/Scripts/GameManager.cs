@@ -20,5 +20,6 @@ public class GameManager : MonoBehaviour
     public void FinishStage()
     {
         currentStage++;
+        UI_Manager.Instance.TurnOnVictoryPanel();
     }
 }

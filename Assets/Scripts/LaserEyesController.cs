@@ -53,9 +53,17 @@ public class LaserEyesController : Enemy
 
     private GameObject laserBeam;
 
+    [Header("Leave Blank if not a boss enemy")]
+    [SerializeField] private Bosses_ScriptableObj BossScObj;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (BossScObj != null)
+        {
+            //health = BossScObj.baseHealth;
+            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+        }
         // Default to targeting the player
         if (player == null)
         {

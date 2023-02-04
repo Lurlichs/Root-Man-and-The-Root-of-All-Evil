@@ -90,6 +90,7 @@ MonoBehaviour:
   boostDecay: 20
   preAttackHeightMin: 9
   preAttackHeightMax: 24
+  BossScObj: {fileID: 11400000, guid: 1c550d629a82a0e48b26c3aeb418dc99, type: 2}
 --- !u!1001 &8260980254278609323
 PrefabInstance:
   m_ObjectHideFlags: 0
