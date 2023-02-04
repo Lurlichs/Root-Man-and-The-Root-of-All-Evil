@@ -95,10 +95,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spike: {fileID: 1396250162364260641, guid: 9a61359e32e7c374a93d60af9344f8fd, type: 3}
   root: {fileID: 4329808208691645257, guid: 74a322c512dbce546aac6550c4eb7c3b, type: 3}
-  chanceOfSpecialIdle: 0.05
-  chanceOfLaugh: 0.05
-  chanceOfSpike: 0.05
-  chanceOfSpit: 0.05
+  chanceOfSpecialIdle: 0.15
+  chanceOfLaugh: 0.1
+  chanceOfSpike: 0.1
+  chanceOfSpit: 0.1
+  chanceOfMelee: 0.1
   BossScObj: {fileID: 0}
 --- !u!65 &3770758557608109406
 BoxCollider:

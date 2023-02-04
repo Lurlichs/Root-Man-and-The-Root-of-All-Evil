@@ -231,6 +231,9 @@ public class LaserEyesController : Enemy
                 currentState = States.AVOID;
             }
         }
+        // Lock Z to 0, for some reason locking Z pos in RB doesn't do this all the
+        // time so this is a hack to make sure it really is 0
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
     }
 
     // Update is called once per frame
