@@ -13,7 +13,8 @@ public class TreeBossController : MonoBehaviour
         IDLE_SPECIAL,
         LAUGH,
         SPIKE,
-        SPIT
+        SPIT,
+        MELEE
     }
 
     [Tooltip("Chance per idle animation cycle of doing the special idle animation")]
@@ -24,6 +25,8 @@ public class TreeBossController : MonoBehaviour
     public float chanceOfSpike = 0.05f;
     [Tooltip("Chance per idle animation cycle of doing a spit attack")]
     public float chanceOfSpit = 0.05f;
+    [Tooltip("Chance per idle animation cycle of doing a melee attack")]
+    public float chanceOfMelee = 0.05f;
 
     private Animator animator;
 
@@ -44,8 +47,8 @@ public class TreeBossController : MonoBehaviour
 
         if (BossScObj != null)
         {
-            //health = BossScObj.baseHealth;
-            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+            //Uncomment when hooked up to enemy class
+            //UI_Manager.Instance.SetBossHealthBar(BossScObj, health);
         }
     }
 
@@ -78,10 +81,18 @@ public class TreeBossController : MonoBehaviour
                 }
                 else
                 {
-                    randomVar -= chanceOfSpit;
+                    randomVar -= chanceOfSpike;
                     if (randomVar < chanceOfSpit)
                     {
                         animator.SetTrigger("StartSpit");
+                    }
+                    else
+                    {
+                        randomVar -= chanceOfSpit;
+                        if (randomVar < chanceOfMelee)
+                        {
+                            animator.SetTrigger("StartMelee");
+                        }
                     }
                 }
             }

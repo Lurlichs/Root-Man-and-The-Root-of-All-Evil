@@ -121,6 +121,7 @@ public class Player : MonoBehaviour
     public bool pressingWalk;
 
     private Animator animator;
+    [SerializeField]private GameObject playerMesh;
 
 
     /*[Header("Behind the scenes stuff")]
@@ -251,7 +252,7 @@ public class Player : MonoBehaviour
 
        
 
-        if (pressingWalk == false)
+        if (playerState == PlayerState.Idle)
         {
             animator.SetBool("Idle", true);
             animator.SetBool("Run", false);
@@ -265,6 +266,11 @@ public class Player : MonoBehaviour
         if (playerState == PlayerState.ShootingIdle)
         {
             animator.SetBool("Attack", true);
+        }
+        if(playerState == PlayerState.Hurt)
+        {
+            animator.SetTrigger("TakeDamage");
+            //animator.SetBool("Run", false);
         }
 
     }
@@ -300,11 +306,13 @@ public class Player : MonoBehaviour
         {
             facingLeft = true;
             transform.position = new Vector3(transform.position.x - currentSpeed * deltaTime, transform.position.y);
+            playerMesh.transform.localScale = new Vector3(1, 1, -1);
         }
         else
         {
             facingLeft = false;
             transform.position = new Vector3(transform.position.x + currentSpeed * deltaTime, transform.position.y);
+            playerMesh.transform.localScale = new Vector3(1, 1, 1);
         }
 
         if (grounded)
