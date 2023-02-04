@@ -14,6 +14,13 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject healthLeaf4;
     [SerializeField] private GameObject healthLeaf5;
 
+    [Header("On Screen Abilities")]
+    [SerializeField] private GameObject onScreenRegenX;
+    [SerializeField] private GameObject onScreenProjectileX;
+    [SerializeField] private GameObject onScreenDoubleJumpX;
+    [SerializeField] private GameObject onScreenRootWaveX;
+    [SerializeField] private GameObject onScreenShieldX;
+
     [Header("Boss Bar")]
     [SerializeField] private CanvasGroup bossBarCG;
     [SerializeField] private Text bossTitle;
@@ -56,30 +63,35 @@ public class UI_Manager : MonoBehaviour
     public void RemoveRegen()
     {
         regenX.SetActive(true);
+        onScreenRegenX.SetActive(true);
         // remove regen for the eplayer
     }
 
     public void RemoveProjectile()
     {
         projectileX.SetActive(true);
+        onScreenProjectileX.SetActive(true);
         // remove projectile for thee player
     }
 
     public void removeDoubleJump()
     {
         doubleJumpX.SetActive(true);
+        onScreenDoubleJumpX.SetActive(true);
         // remove double jump for the eplayer
     }
 
     public void RemoveRootWave()
     {
         rootWaveX.SetActive(true);
+        onScreenRootWaveX.SetActive(true);
         // remove root wave for thee player
     }
 
     public void RemoveShield()
     {
         shieldX.SetActive(true);
+        onScreenShieldX.SetActive(true);
         // remove shield for thee player
     }
     #endregion
