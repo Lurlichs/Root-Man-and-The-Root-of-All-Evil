@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartStage();
+        StartNextStage();
     }
 
-    public void StartStage()
+    public void StartNextStage()
     {
         stages[currentStage].Setup();
     }
