@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Boss_1
   m_EditorClassIdentifier: 
   id: 1
-  bossName: Level 1 Boss
+  bossName: ROOT OF SOME AMOUNT OF EVIL
   baseHealth: 10

@@ -44,7 +44,7 @@ public class UI_Manager : MonoBehaviour
 
     public void UpdateHealthSetup()
     {
-
+        //turn off the corresponding leaf
     }
 
     public void TurnOnVictoryPanel()
