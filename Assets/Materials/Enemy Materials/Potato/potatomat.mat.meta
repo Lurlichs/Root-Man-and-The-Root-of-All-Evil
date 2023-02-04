@@ -1,8 +1,13 @@
 fileFormatVersion: 2
-guid: 60e6d9b90e4fd8b439efdb199f51ec39
+<<<<<<< Updated upstream:Assets/Materials/Enemy Materials/Potato/potatomat.mat.meta
+guid: 4ad8e256a9792084cb869816b7db908f
 NativeFormatImporter:
+=======
+guid: 90f932137b922c04b802f8ba5995d605
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Stashed changes:Assets/Shaders/Outlines.meta
   externalObjects: {}
-  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
     [Header("In game states")]
     public PlayerState playerState;
 
-    [SerializeField] private int currentHealth;
+    public int currentHealth;
     [SerializeField] private bool facingLeft;
 
     [SerializeField] private float currentSpeed;
@@ -357,7 +357,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-
+        UI_Manager.Instance.TurnOnDeathScreen();
     }
 
     public void RegenHealth()
@@ -378,6 +378,7 @@ public class Player : MonoBehaviour
         if (currentInvulnerabilityTime == 0 && !activatingShield)
         {
             currentHealth--;
+            UI_Manager.Instance.UpdateHealthSetup();
 
             if (currentHealth <= 0)
             {
