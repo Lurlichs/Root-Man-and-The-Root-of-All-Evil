@@ -248,6 +248,25 @@ public class Player : MonoBehaviour
                 playerState = PlayerState.Idle;
             }
         }
+
+       
+
+        if (pressingWalk == false)
+        {
+            animator.SetBool("Idle", true);
+            animator.SetBool("Run", false);
+        }
+
+        if (pressingWalk == true || grounded == false)
+        {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Run", true);
+        }
+        if (playerState == PlayerState.ShootingIdle)
+        {
+            animator.SetBool("Attack", true);
+        }
+
     }
 
     public void Setup()
