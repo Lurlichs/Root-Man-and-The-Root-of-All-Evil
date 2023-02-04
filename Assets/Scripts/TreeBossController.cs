@@ -26,6 +26,9 @@ public class TreeBossController : MonoBehaviour
 
     private States currentState;
 
+    [Header("Leave Blank if not a boss enemy")]
+    [SerializeField] private Bosses_ScriptableObj BossScObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,12 @@ public class TreeBossController : MonoBehaviour
         // Because the animator is in a child object, we can't get it to call a function here,
         // instead, use AnimationEventsHandler to forward the calls to our AnimationClipEnded method
         GetComponentInChildren<AnimationEventsHandler>().AddAnimationClipEndCallback(AnimationClipEnded);
+
+        if (BossScObj != null)
+        {
+            //health = BossScObj.baseHealth;
+            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+        }
     }
 
     // Update is called once per frame
