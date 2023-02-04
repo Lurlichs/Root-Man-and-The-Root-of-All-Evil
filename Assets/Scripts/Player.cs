@@ -395,6 +395,7 @@ public class Player : MonoBehaviour
         {
             currentHealth++;
             currentRegenerationCooldown = regenerationCooldown;
+            UI_Manager.Instance.UpdateHealthSetup();
         }
     }
 

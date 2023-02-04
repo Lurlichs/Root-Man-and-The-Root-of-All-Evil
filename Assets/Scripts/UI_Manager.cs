@@ -217,8 +217,8 @@ public class UI_Manager : MonoBehaviour
 
     public void Reload()
     {
+        Time.timeScale = 1f;
         Scene thisScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(thisScene.name);
-
     }
 }
