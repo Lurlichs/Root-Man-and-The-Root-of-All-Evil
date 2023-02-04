@@ -83,7 +83,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 119
-  BossScObj: {fileID: 0}
+  BossScObj: {fileID: 11400000, guid: 412c77f8505cfe447ab02e1f1582fb32, type: 2}
 --- !u!114 &6124986047885162060
 MonoBehaviour:
   m_ObjectHideFlags: 0

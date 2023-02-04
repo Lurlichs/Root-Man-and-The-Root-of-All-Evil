@@ -27,8 +27,7 @@ public class RollerController : Enemy
 
         if (BossScObj != null)
         {
-            health = BossScObj.baseHealth;
-            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+            UI_Manager.Instance.SetBossHealthBar(BossScObj, health);
         }
     }
 

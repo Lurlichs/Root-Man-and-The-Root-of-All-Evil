@@ -47,8 +47,8 @@ public class TreeBossController : MonoBehaviour
 
         if (BossScObj != null)
         {
-            //health = BossScObj.baseHealth;
-            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+            //Uncomment when hooked up to enemy class
+            //UI_Manager.Instance.SetBossHealthBar(BossScObj, health);
         }
     }
 
