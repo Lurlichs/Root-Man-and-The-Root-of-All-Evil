@@ -40,6 +40,7 @@ public class LaserEyesController : Enemy
 
     private Rigidbody rb;
     private Animator animator;
+    private LookAhead lookahead;
 
     private States currentState;
 
@@ -63,6 +64,7 @@ public class LaserEyesController : Enemy
         rb = GetComponent<Rigidbody>();
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
+        lookahead = GetComponent<LookAhead>();
         onionEye = GetComponentInChildren<OnionEye>().transform;
         onionChild = transform.GetChild(0);
         lastStateTransition = Time.fixedTime;
@@ -108,46 +110,20 @@ public class LaserEyesController : Enemy
         {
             // Patrol mode, alternate between right and left walking
             animator.speed = 1.0f;
-            if (moveRight)
-            {
-                rb.velocity = new Vector3(walkSpeed, rb.velocity.y, 0.0f);
-            }
-            else
-            {
-                rb.velocity = new Vector3(-walkSpeed, rb.velocity.y, 0.0f);
-            }
-            // Check if about to hit a wall or fall off the ground
-            float xCheck = inFrontFactor * transform.localScale.x;
-            if (moveRight)
-            {
-                xCheck = transform.position.x + xCheck;
-            }
-            else
-            {
-                xCheck = transform.position.x - xCheck;
-            }
-            Vector3 checkPosition = new Vector3(xCheck, transform.position.y + floorPosition, transform.position.z);
-            //Debug.DrawLine(checkPosition, checkPosition + new Vector3(0.0f, 1.0f, 0.0f));
-            Collider[] collisions = Physics.OverlapSphere(checkPosition, 0.1f);
-            bool groundInFront = false;
-            bool obstacleInFront = false;
-            foreach (Collider collider in collisions)
-            {
-                if (collider.tag == "Ground")
-                {
-                    groundInFront = true;
-                }
-                else
-                {
-                    obstacleInFront = true;
-                }
-            }
             // Swap patrol direction if about to fall or hit something
-            if (!groundInFront || obstacleInFront)
+            if (!lookahead.CheckIfCanMoveInFront(transform, moveRight))
             {
                 // Patrol in other direction
                 moveRight = !moveRight;
                 UpdateMoveDirection();
+            }
+            if (moveRight)
+            {
+                rb.velocity = new Vector3(walkSpeed * runFactor, rb.velocity.y, 0.0f);
+            }
+            else
+            {
+                rb.velocity = new Vector3(-walkSpeed * runFactor, rb.velocity.y, 0.0f);
             }
             if (CanSeePlayer())
             {

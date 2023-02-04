@@ -12,6 +12,7 @@ public class RollerController : Enemy
     private bool isPositive;
     private float currentVelocity;
     private Rigidbody rb;
+    private LookAhead lookahead;
 
     [Header("Leave Blank if not a boss enemy")]
     [SerializeField] private Bosses_ScriptableObj BossScObj;
@@ -20,6 +21,7 @@ public class RollerController : Enemy
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        lookahead = GetComponent<LookAhead>();
         // Half go right, half go left
         isPositive = startRight;
 
@@ -52,25 +54,9 @@ public class RollerController : Enemy
         }
         rb.velocity = new Vector3(currentVelocity, rb.velocity.y, rb.velocity.z);
         rb.angularVelocity = new Vector3(0.0f, 0.0f, -currentVelocity);
-        // Lock z position
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // Check if is a collision with floor
-        bool isFloor = true;
-        foreach (ContactPoint contact in collision.contacts)
+        if (!lookahead.CheckIfCanMoveInFront(transform, isPositive))
         {
-            // If contact normal is not close to being "up", it's not the floor
-            float howCloseToUp = Vector3.Dot(contact.normal, Vector3.up);
-            if (howCloseToUp < 0.95f)
-            {
-                isFloor = false;
-            }    
-        }
-        if (!isFloor)
-        {
+            // Change direction
             currentVelocity = 0.0f;
             isPositive = !isPositive;
         }

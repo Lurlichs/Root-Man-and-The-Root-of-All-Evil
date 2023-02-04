@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8975402790696339584}
   - component: {fileID: 8975402790696339587}
   - component: {fileID: 8975402790696339588}
+  - component: {fileID: 6124986047885162060}
   - component: {fileID: 8975402790696339586}
   m_Layer: 7
   m_Name: Onion
@@ -81,6 +82,22 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 119
+--- !u!114 &6124986047885162060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975402790696339599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f4f630a7ac82046b2d5dfcd098cbda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inFrontFactor: 0.7
+  floorPosition: 0.26
+  collisionCheckSize: 0.2
+  showCollider: 0
 --- !u!54 &8975402790696339586
 Rigidbody:
   m_ObjectHideFlags: 0
