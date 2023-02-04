@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6124986047885162060}
   - component: {fileID: 8975402790696339586}
   m_Layer: 7
-  m_Name: Onion
+  m_Name: Onion Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8975402790696339599}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.2, y: 0.87, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 2.7, y: 2.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8864685185761821685}
@@ -61,13 +61,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c388db1e099bdbc408b0f35a38f67755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
+  health: 150
   player: {fileID: 0}
   stageController: {fileID: 0}
   rb: {fileID: 8975402790696339586}
   deathEffect: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
-  attackFrequency: 15
+  attackFrequency: 25
   walkSpeed: 1.5
   runFactor: 2
   laserBeamLinger: 0.2

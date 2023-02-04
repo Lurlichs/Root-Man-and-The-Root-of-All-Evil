@@ -8,6 +8,7 @@ public class UI_Manager : MonoBehaviour
 {
     public static UI_Manager Instance;
     [SerializeField] private Player player;
+    [SerializeField] private GameManager gameManager;
 
     [Header("Health")]
     [SerializeField] private GameObject healthLeaf1;
@@ -142,6 +143,7 @@ public class UI_Manager : MonoBehaviour
     {
         victoryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        gameManager.StartNextStage();
     }
 
     #region remove ability button functions

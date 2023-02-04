@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15f5c0ccd3551c48a4c1f57cdc56a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8
+  health: 6
   player: {fileID: 0}
   stageController: {fileID: 0}
   rb: {fileID: 8260980253245367833}
@@ -92,7 +92,7 @@ MonoBehaviour:
   preAttackHeightMax: 8
   attackDistance: 20
   attackColliderBlanking: 0.15
-  BossScObj: {fileID: 11400000, guid: 1c550d629a82a0e48b26c3aeb418dc99, type: 2}
+  BossScObj: {fileID: 0}
 --- !u!1001 &8260980254278609323
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3214,6 +3214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  gameManager: {fileID: 0}
   healthLeaf1: {fileID: 11436729323032614}
   healthLeaf2: {fileID: 9155154281634050688}
   healthLeaf3: {fileID: 2208518620921142980}
@@ -5351,7 +5352,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4703604210351024638}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: removeDoubleJump
+        m_MethodName: RemoveDoubleJump
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
