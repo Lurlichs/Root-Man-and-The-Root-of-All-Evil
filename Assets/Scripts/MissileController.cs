@@ -30,9 +30,12 @@ public class MissileController : Enemy
     public float preAttackHeightMax = 15.0f;
     [Tooltip("Player must be within this X distance to provoke attacks")]
     public float attackDistance = 20.0f;
+    [Tooltip("How long, in seconds, to ignore collisions for when starting to attack")]
+    public float attackColliderBlanking = 0.150f;
 
     private Rigidbody rb;
     private Animator animator;
+    private Collider collider;
 
     private States currentState;
 
@@ -49,7 +52,7 @@ public class MissileController : Enemy
         if (BossScObj != null)
         {
             //health = BossScObj.baseHealth;
-            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+            //UI_Manager.Instance.SetBossHealthBar(BossScObj);
         }
         if (player == null)
         {
@@ -59,6 +62,7 @@ public class MissileController : Enemy
         rb = GetComponent<Rigidbody>();
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
+        collider = GetComponent<Collider>();
         lastStateTransition = Time.fixedTime;
         currentState = States.IDLE;
     }
@@ -119,12 +123,21 @@ public class MissileController : Enemy
                 attackAngle = Mathf.Atan2(player.transform.position.y - transform.position.y + 1.0f, player.transform.position.x - transform.position.x);
                 lastStateTransition = Time.fixedTime;
                 currentState = States.ATTACK;
+                // Temporarily disable the collider in case there are nearby
+                // walls blocking the carrot from turning towards the player
+                collider.enabled = false;
             }
         }
         else if (currentState == States.ATTACK)
         {
             float boostedAttackSpeed = attackSpeed * CalculateBoostFactor();
             rb.velocity = new Vector3(Mathf.Cos(attackAngle) * boostedAttackSpeed, Mathf.Sin(attackAngle) * boostedAttackSpeed, 0.0f);
+            if (!collider.enabled && (Time.fixedTime - lastStateTransition >= attackColliderBlanking))
+            {
+                // Re-enable collider as its been long enough for the carrot to travel
+                // enough to clear nearby walls
+                collider.enabled = true;
+            }
         }
         // Lock z position
         if (currentState == States.RISING)
