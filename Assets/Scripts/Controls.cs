@@ -20,11 +20,18 @@ public class Controls : MonoBehaviour
                 if (Input.GetKey(KeyCode.D))
                 {
                     playerController.MoveDirection(false, Time.deltaTime);
+                    playerController.pressingWalk = true;
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
                     playerController.MoveDirection(true, Time.deltaTime);
+                    playerController.pressingWalk = true;
+                }
+
+                if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+                {
+                    playerController.pressingWalk = false;
                 }
 
                 if (Input.GetMouseButton(0))

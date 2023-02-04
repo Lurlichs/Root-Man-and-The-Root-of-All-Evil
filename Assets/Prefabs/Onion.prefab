@@ -67,7 +67,7 @@ MonoBehaviour:
   rb: {fileID: 8975402790696339586}
   deathEffect: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
-  attackFrequency: 15
+  attackFrequency: 8
   walkSpeed: 1.5
   runFactor: 2
   laserBeamLinger: 0.2
@@ -77,11 +77,13 @@ MonoBehaviour:
   floorPosition: 0.26
   yThreshold: 1
   returnToPatrolTime: 5
+  attackDistance: 10
   laserOnTime: 0.33
   laserOffTime: 0.66
   layerMask:
     serializedVersion: 2
     m_Bits: 119
+  BossScObj: {fileID: 0}
 --- !u!114 &6124986047885162060
 MonoBehaviour:
   m_ObjectHideFlags: 0

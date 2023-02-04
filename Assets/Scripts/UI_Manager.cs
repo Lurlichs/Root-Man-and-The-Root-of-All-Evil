@@ -149,7 +149,7 @@ public class UI_Manager : MonoBehaviour
     {
         regenX.SetActive(true);
         onScreenRegenX.SetActive(true);
-        player.DisablePower(1);
+        player.DisablePower(0);
         TurnOffVictoryPanel();
     }
 
@@ -157,15 +157,15 @@ public class UI_Manager : MonoBehaviour
     {
         projectileX.SetActive(true);
         onScreenProjectileX.SetActive(true);
-        player.DisablePower(2);
+        player.DisablePower(1);
         TurnOffVictoryPanel();
     }
 
-    public void removeDoubleJump()
+    public void RemoveDoubleJump()
     {
         doubleJumpX.SetActive(true);
         onScreenDoubleJumpX.SetActive(true);
-        player.DisablePower(3);
+        player.DisablePower(2);
         TurnOffVictoryPanel();
     }
 
@@ -173,7 +173,7 @@ public class UI_Manager : MonoBehaviour
     {
         rootWaveX.SetActive(true);
         onScreenRootWaveX.SetActive(true);
-        player.DisablePower(4);
+        player.DisablePower(3);
         TurnOffVictoryPanel();
     }
 
@@ -181,7 +181,7 @@ public class UI_Manager : MonoBehaviour
     {
         shieldX.SetActive(true);
         onScreenShieldX.SetActive(true);
-        player.DisablePower(5);
+        player.DisablePower(4);
         TurnOffVictoryPanel();
     }
     #endregion

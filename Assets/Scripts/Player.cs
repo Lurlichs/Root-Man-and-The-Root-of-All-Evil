@@ -118,6 +118,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject currentShieldObject;
 
+    public bool pressingWalk;
+
     private Animator animator;
 
 
@@ -149,32 +151,32 @@ public class Player : MonoBehaviour
         if (currentRecoilTime > 0)
         {
             currentRecoilTime -= time;
+        }
 
-            if (currentRecoilTime <= 0)
-            {
-                currentRecoilTime = 0;
-            }
+        if (currentRecoilTime <= 0)
+        {
+            currentRecoilTime = 0;
         }
 
         if (currentRootWaveCooldown > 0 && GetPowerByName("rootWave").currentlyActive)
         {
             currentRootWaveCooldown -= time;
+        }
 
-            if (currentRootWaveCooldown <= 0)
-            {
-                currentRootWaveCooldown = 0;
-            }
+        if (currentRootWaveCooldown <= 0)
+        {
+            currentRootWaveCooldown = 0;
         }
 
         if (currentRegenerationCooldown > 0 && GetPowerByName("regen").currentlyActive)
         {
             currentRegenerationCooldown -= time;
+        }
 
-            if (currentRegenerationCooldown <= 0)
-            {
-                currentRegenerationCooldown = 0;
-                RegenHealth();
-            }
+        if (currentRegenerationCooldown <= 0)
+        {
+            currentRegenerationCooldown = 0;
+            RegenHealth();
         }
 
         if (currentAttackCooldown > 0)
@@ -209,7 +211,7 @@ public class Player : MonoBehaviour
             currentSpeed = speed / airDrag;
         }
 
-        if (rb.velocity.y < 0.1f && currentRecoilTime == 0)
+        if (rb.velocity.y < -0.1f && currentRecoilTime == 0)
         {
             if (currentProjectileStateDuration > 0)
             {
@@ -235,7 +237,7 @@ public class Player : MonoBehaviour
 
             rb.velocity += (gravityMultiplier - 1) * Physics.gravity.y * time * Vector3.up;
         }
-        else if (rb.velocity == Vector3.zero && !activatingShield && currentRecoilTime == 0)
+        else if (rb.velocity == Vector3.zero && !activatingShield && currentRecoilTime == 0 && !pressingWalk)
         {
             if (currentProjectileStateDuration > 0)
             {
