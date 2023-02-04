@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8975402790696339586}
   m_Layer: 7
   m_Name: Onion
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,6 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c388db1e099bdbc408b0f35a38f67755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
+  player: {fileID: 0}
+  stageController: {fileID: 0}
   attackFrequency: 10
   walkSpeed: 1.5
   runFactor: 2
@@ -75,7 +78,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 119
-  target: {fileID: 0}
 --- !u!54 &8975402790696339586
 Rigidbody:
   m_ObjectHideFlags: 0
