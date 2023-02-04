@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   bossName: ROOT OF ALL EVIL
-  baseHealth: 50
+  baseHealth: 40

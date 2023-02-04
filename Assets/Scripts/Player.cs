@@ -128,6 +128,7 @@ public class Player : MonoBehaviour
     {
         Setup();
         animator = GetComponentInChildren<Animator>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Ticks invulnerabilities and other cooldowns

@@ -63,7 +63,7 @@ public class LaserEyesController : Enemy
     {
         if (BossScObj != null)
         {
-            //health = BossScObj.baseHealth;
+            health = BossScObj.baseHealth;
             UI_Manager.Instance.SetBossHealthBar(BossScObj);
         }
         // Default to targeting the player

@@ -51,7 +51,7 @@ public class MissileController : Enemy
     {
         if (BossScObj != null)
         {
-            //health = BossScObj.baseHealth;
+            health = BossScObj.baseHealth;
             UI_Manager.Instance.SetBossHealthBar(BossScObj);
         }
         if (player == null)
