@@ -189,11 +189,11 @@ public class UI_Manager : MonoBehaviour
     #endregion
 
     #region Boss Health bar display
-    public void SetBossHealthBar(Bosses_ScriptableObj boss)
+    public void SetBossHealthBar(Bosses_ScriptableObj boss, float bHealth)
     {
         bossTitle.text = boss.bossName;
-        bossHealthSlider.maxValue = boss.baseHealth;
-        bossHealthSlider.value = boss.baseHealth;
+        bossHealthSlider.maxValue = bHealth;
+        bossHealthSlider.value = bHealth;
         fadeBossBarNow = true;
     }
 
@@ -261,7 +261,13 @@ public class UI_Manager : MonoBehaviour
     public void Reload()
     {
         Time.timeScale = 1f;
-        Scene thisScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(thisScene.name);
+        SceneManager.LoadScene(0);
+    }
+
+
+    public void ExitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 }

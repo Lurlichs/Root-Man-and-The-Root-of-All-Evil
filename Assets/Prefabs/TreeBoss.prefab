@@ -96,6 +96,7 @@ MonoBehaviour:
   chanceOfLaugh: 0.05
   chanceOfSpike: 0.05
   chanceOfSpit: 0.05
+  BossScObj: {fileID: 11400000, guid: 95b0757d36a993540944c6e6614550e0, type: 2}
 --- !u!1001 &23277805880824134
 PrefabInstance:
   m_ObjectHideFlags: 0
