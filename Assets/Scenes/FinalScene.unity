@@ -6066,7 +6066,7 @@ PrefabInstance:
     - target: {fileID: 220554663949129563, guid: 2103ef516670bbd4da0a0ba06d7f02c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3000187
+      value: 0.9000004
       objectReference: {fileID: 0}
     - target: {fileID: 220554663949129563, guid: 2103ef516670bbd4da0a0ba06d7f02c7,
         type: 3}
@@ -8659,7 +8659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e98aafa94e8f6f47b5f8be97de7a6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 444796486}
   intermissionDuration: 3
   player: {fileID: 454267269}
   spawnParticles: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
@@ -9159,7 +9159,7 @@ PrefabInstance:
     - target: {fileID: 220554663949129563, guid: 2103ef516670bbd4da0a0ba06d7f02c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3000187
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 220554663949129563, guid: 2103ef516670bbd4da0a0ba06d7f02c7,
         type: 3}
@@ -9722,7 +9722,7 @@ PrefabInstance:
     - target: {fileID: 220554663949129563, guid: 2103ef516670bbd4da0a0ba06d7f02c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3000187
+      value: 0.7299817
       objectReference: {fileID: 0}
     - target: {fileID: 220554663949129563, guid: 2103ef516670bbd4da0a0ba06d7f02c7,
         type: 3}
