@@ -41,6 +41,9 @@ public class UI_Manager : MonoBehaviour
     private bool isPaused;
     [SerializeField] private GameObject pausePanel;
 
+    [Header("Title Screen")]
+    [SerializeField] private GameObject titleUI;
+
     [Header("Death Panel")]
     public GameObject deathPanel;
 
@@ -58,7 +61,7 @@ public class UI_Manager : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -196,6 +199,13 @@ public class UI_Manager : MonoBehaviour
         isPaused = true;
 
     }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(1);
+        titleUI.SetActive(false);
+    }
+
 
     public void TurnOnDeathScreen()
     {
