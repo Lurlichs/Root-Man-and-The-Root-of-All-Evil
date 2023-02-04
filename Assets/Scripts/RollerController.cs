@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RollerController : MonoBehaviour
+public class RollerController : Enemy
 {
     public float acceleration = 0.5f;
     public float maximumSpeed = 2.0f;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8260980253245367830}
   m_Layer: 0
   m_Name: Carrot
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15f5c0ccd3551c48a4c1f57cdc56a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
+  player: {fileID: 0}
   attackFrequency: 5
   wiggleTime: 3
   preAttackSpeed: 10
@@ -84,7 +86,6 @@ MonoBehaviour:
   boostDecay: 20
   preAttackHeightMin: 3
   preAttackHeightMax: 8
-  target: {fileID: 0}
 --- !u!1001 &8260980254278609323
 PrefabInstance:
   m_ObjectHideFlags: 0

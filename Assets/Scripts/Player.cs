@@ -52,10 +52,11 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float playerHeight;
 
-    [SerializeField] private float projectileDamage;
+    [SerializeField] private float attackDamage;
     [SerializeField] private float projectileSpeed;
+    [SerializeField] private float meleeDistance;
     // How long does the player keep up the "Shooting" state if they are shooting
-    [SerializeField] private float projectileStateDuration;
+    [SerializeField] private float attackStateDuration;
 
     [SerializeField] private float jumpPower;
     [SerializeField] private float gravityMultiplier;
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float currentSpeed;
 
-    [SerializeField] private float currentProjectileCooldown;
+    [SerializeField] private float currentAttackCooldown;
     [SerializeField] private float currentProjectileStateDuration;
     public float currentRecoilTime;
     [SerializeField] private float currentInvulnerabilityTime;
@@ -172,13 +173,13 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (currentProjectileCooldown > 0)
+        if (currentAttackCooldown > 0)
         {
-            currentProjectileCooldown -= time;
+            currentAttackCooldown -= time;
 
-            if (currentProjectileCooldown <= 0)
+            if (currentAttackCooldown <= 0)
             {
-                currentProjectileCooldown = 0;
+                currentAttackCooldown = 0;
             }
         }
 
@@ -254,10 +255,12 @@ public class Player : MonoBehaviour
             power.currentlyActive = true;
         }
 
+        //GetPowerByName("projectile").currentlyActive = false;
+
         currentHealth = maxHealth;
         rb.velocity = new Vector3();
 
-        currentProjectileCooldown = 0;
+        currentAttackCooldown = 0;
         currentProjectileStateDuration = 0;
         currentRecoilTime = 0;
         currentInvulnerabilityTime = 0;
@@ -316,32 +319,45 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// TRIES to shoot a projectile.
+    /// TRIES to shoot a projectile if enabled, else will do a melee.
     /// </summary>
-    public void ShootProjectile()
+    public void Attack()
     {
-        if (currentProjectileCooldown == 0)
+        if (currentAttackCooldown == 0)
         {
             // Ranged attack
             if (GetPowerByName("projectile").currentlyActive)
             {
-                currentProjectileStateDuration = projectileStateDuration;
-                currentProjectileCooldown = projectileCooldown;
+                currentProjectileStateDuration = attackStateDuration;
+                currentAttackCooldown = projectileCooldown;
 
                 GameObject projectile = Instantiate(projectilePrefab);
                 Projectile projectileComponent = projectile.GetComponent<Projectile>();
 
                 //projectiles.Add(projectileComponent);
-                projectileComponent.Setup(projectileDamage, projectileSpeed, facingLeft);
+                projectileComponent.Setup(attackDamage, projectileSpeed, facingLeft);
 
                 projectile.transform.position = transform.position;
             }
             else // Melee
             {
-                currentProjectileStateDuration = projectileStateDuration;
-                currentProjectileCooldown = projectileCooldown;
+                currentProjectileStateDuration = attackStateDuration;
+                currentAttackCooldown = projectileCooldown;
 
+                GameObject melee = Instantiate(meleeHitPrefab);
+                MeleeHit meleeHit = melee.GetComponent<MeleeHit>();
 
+                meleeHit.Setup(attackDamage, facingLeft);
+
+                meleeHit.transform.position = transform.position;
+                if(facingLeft) {
+                    meleeHit.transform.position = new Vector3(meleeHit.transform.position.x - meleeDistance, 
+                        meleeHit.transform.position.y, meleeHit.transform.position.z);
+                 } 
+                else {
+                    meleeHit.transform.position = new Vector3(meleeHit.transform.position.x + meleeDistance,
+                        meleeHit.transform.position.y, meleeHit.transform.position.z);
+                }
             }
 
         }
@@ -370,7 +386,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        UI_Manager.Instance.TurnOnDeathScreen();
+        //UI_Manager.Instance.TurnOnDeathScreen();
     }
 
     public void RegenHealth()
@@ -391,7 +407,7 @@ public class Player : MonoBehaviour
         if (currentInvulnerabilityTime == 0 && !activatingShield)
         {
             currentHealth--;
-            UI_Manager.Instance.UpdateHealthSetup();
+            //UI_Manager.Instance.UpdateHealthSetup();
 
             if (currentHealth <= 0)
             {

@@ -40,12 +40,12 @@ public class Projectile : MonoBehaviour
 
     private void HitTarget(GameObject enemy)
     {
-
+        enemy.GetComponent<Enemy>().TakeDamage(damage);
+        Die();
     }
 
     private void Die()
     {
-        //player.RemoveProjectile(this);
         Destroy(gameObject);
     }
 

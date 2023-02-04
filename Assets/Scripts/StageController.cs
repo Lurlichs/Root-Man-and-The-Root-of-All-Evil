@@ -26,14 +26,20 @@ public class StageController : MonoBehaviour
     [SerializeField] private List<Wave> waves;
 
     [Header("During Gameplay")]
-    public bool gameStarted;
+    public bool waveStarted;
     
     [SerializeField] private int currentWave;
     [SerializeField] private List<GameObject> livingEnemies;
 
+    private void Start()
+    {
+        TriggerNextWave();
+        waveStarted = true;
+    }
+
     private void Update()
     {
-        if (gameStarted && livingEnemies.Count == 0)
+        if (waveStarted && livingEnemies.Count == 0)
         {
             StartCoroutine(Intermission());
         }
@@ -41,18 +47,21 @@ public class StageController : MonoBehaviour
 
     public void TriggerNextWave()
     {
-        currentWave++;
-
         if(currentWave <= waves.Count)
         {
+            Debug.Log(waves[currentWave].spawns.Count);
+
             foreach (Spawn spawn in waves[currentWave].spawns)
             {
                 GameObject spawnedEnemy = Instantiate(spawn.enemy);
                 spawnedEnemy.transform.position = spawn.spawnPos;
-                spawnedEnemy.GetComponent<Enemy>().Setup(player);
+                spawnedEnemy.GetComponent<Enemy>().Setup(player, this);
                 livingEnemies.Add(spawnedEnemy);
             }
         }
+
+        currentWave++;
+        waveStarted = true;
     }
 
     /// <summary>
@@ -61,6 +70,8 @@ public class StageController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Intermission()
     {
+        waveStarted = false;
+
         yield return new WaitForSeconds(intermissionDuration);
 
         TriggerNextWave();
@@ -74,5 +85,10 @@ public class StageController : MonoBehaviour
     public void TriggerGameEnd()
     {
 
+    }
+
+    public void RemoveDeadEnemy(GameObject gameObject)
+    {
+        livingEnemies.Remove(gameObject);
     }
 }

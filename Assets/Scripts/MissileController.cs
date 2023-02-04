@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Missile type enemy that tries to launch itself in an arc at the player
-public class MissileController : MonoBehaviour
+public class MissileController : Enemy
 {
     enum States
     {
@@ -29,8 +29,6 @@ public class MissileController : MonoBehaviour
     [Tooltip("Maximum height to rise out of the ground")]
     public float preAttackHeightMax = 15.0f;
 
-    public Transform target;
-
     private Rigidbody rb;
     private Animator animator;
 
@@ -43,11 +41,11 @@ public class MissileController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Default to targeting the player
-        if (target == null)
+        if(player == null)
         {
-            target = FindObjectOfType<Player>().transform;
+            player = FindObjectOfType<Player>();
         }
+
         rb = GetComponent<Rigidbody>();
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
@@ -59,11 +57,6 @@ public class MissileController : MonoBehaviour
     void Update()
     {
 
-    }
-
-    void SetTarget(Transform desiredTarget)
-    {
-        target = desiredTarget;
     }
 
     float CalculateBoostFactor()
@@ -94,7 +87,7 @@ public class MissileController : MonoBehaviour
             if ((Time.fixedTime - lastStateTransition) > wiggleTime)
             {
                 // Go higher than both current height and target
-                float yBase = Mathf.Max(transform.position.y, target.position.y);
+                float yBase = Mathf.Max(transform.position.y, player.transform.position.y);
                 preAttackHeight = yBase + Random.Range(preAttackHeightMin, preAttackHeightMax);
                 // Start a bit into the air to avoid colliding with the floor
                 transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f, 0.0f);
@@ -112,7 +105,7 @@ public class MissileController : MonoBehaviour
                 // Up to required, height, start real attack
                 // Set attack angle to head to where player is now
                 // Actually aim a little bit high
-                attackAngle = Mathf.Atan2(target.position.y - transform.position.y + 1.0f, target.position.x - transform.position.x);
+                attackAngle = Mathf.Atan2(player.transform.position.y - transform.position.y + 1.0f, player.transform.position.x - transform.position.x);
                 lastStateTransition = Time.fixedTime;
                 currentState = States.ATTACK;
             }

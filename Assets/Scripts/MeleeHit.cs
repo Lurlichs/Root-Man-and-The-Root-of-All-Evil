@@ -4,15 +4,43 @@ using UnityEngine;
 
 public class MeleeHit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Player player;
+    private float damage;
+    private bool left;
+
+    private float age = 3f;
+
+    public void Setup(float damage, bool left)
     {
-        
+        this.damage = damage;
+        this.left = left;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        age -= Time.deltaTime;
+
+        if (age <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void HitTarget(GameObject enemy)
+    {
+        enemy.GetComponent<Enemy>().TakeDamage(damage);
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            HitTarget(other.gameObject);
+        }
     }
 }

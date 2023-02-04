@@ -29,7 +29,7 @@ public class Controls : MonoBehaviour
 
                 if (Input.GetMouseButton(0))
                 {
-                    playerController.ShootProjectile();
+                    playerController.Attack();
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
