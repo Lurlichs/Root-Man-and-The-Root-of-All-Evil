@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject meleeHitPrefab;
     [SerializeField] private GameObject regenParticles;
     [SerializeField] private GameObject jumpParticles;
     [SerializeField] private GameObject punchParticles;
@@ -171,7 +172,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (currentProjectileCooldown > 0 && GetPowerByName("projectile").currentlyActive)
+        if (currentProjectileCooldown > 0)
         {
             currentProjectileCooldown -= time;
 
@@ -321,16 +322,28 @@ public class Player : MonoBehaviour
     {
         if (currentProjectileCooldown == 0)
         {
-            currentProjectileStateDuration = projectileStateDuration;
-            currentProjectileCooldown = projectileCooldown;
+            // Ranged attack
+            if (GetPowerByName("projectile").currentlyActive)
+            {
+                currentProjectileStateDuration = projectileStateDuration;
+                currentProjectileCooldown = projectileCooldown;
 
-            GameObject projectile = Instantiate(projectilePrefab);
-            Projectile projectileComponent = projectile.GetComponent<Projectile>();
+                GameObject projectile = Instantiate(projectilePrefab);
+                Projectile projectileComponent = projectile.GetComponent<Projectile>();
 
-            //projectiles.Add(projectileComponent);
-            projectileComponent.Setup(projectileDamage, projectileSpeed, facingLeft);
+                //projectiles.Add(projectileComponent);
+                projectileComponent.Setup(projectileDamage, projectileSpeed, facingLeft);
 
-            projectile.transform.position = transform.position;
+                projectile.transform.position = transform.position;
+            }
+            else // Melee
+            {
+                currentProjectileStateDuration = projectileStateDuration;
+                currentProjectileCooldown = projectileCooldown;
+
+
+            }
+
         }
     }
 
