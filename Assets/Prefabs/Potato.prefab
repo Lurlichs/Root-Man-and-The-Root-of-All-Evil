@@ -128,8 +128,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffb592de7735a542b2ce84994c524ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
+  health: 10
   player: {fileID: 0}
+  stageController: {fileID: 0}
+  rb: {fileID: 2702485830317621521}
+  deathEffect: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
+    type: 3}
   acceleration: 5
   maximumSpeed: 5
+  startRight: 1
   BossScObj: {fileID: 0}

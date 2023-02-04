@@ -18,8 +18,10 @@ public struct Spawn
 public class StageController : MonoBehaviour
 {
     [Header("Constants")]
+    [SerializeField] public GameManager gameManager;
     [SerializeField] public float intermissionDuration;
     [SerializeField] private Player player;
+    [SerializeField] private GameObject spawnParticles;
 
     [Header("Stage info")]
     public int stageNumber;
@@ -31,7 +33,7 @@ public class StageController : MonoBehaviour
     [SerializeField] private int currentWave;
     [SerializeField] private List<GameObject> livingEnemies;
 
-    private void Start()
+    public void Setup()
     {
         TriggerNextWave();
         waveStarted = true;
@@ -47,13 +49,17 @@ public class StageController : MonoBehaviour
 
     public void TriggerNextWave()
     {
-        if(currentWave <= waves.Count)
+        if(currentWave < waves.Count)
         {
             Debug.Log(waves[currentWave].spawns.Count);
 
             foreach (Spawn spawn in waves[currentWave].spawns)
             {
-                GameObject spawnedEnemy = Instantiate(spawn.enemy);
+                GameObject spawnedEnemy = Instantiate(spawn.enemy); 
+
+                GameObject spawnEffect = Instantiate(spawnParticles);
+                spawnEffect.transform.position = spawn.spawnPos;
+
                 spawnedEnemy.transform.position = spawn.spawnPos;
                 spawnedEnemy.GetComponent<Enemy>().Setup(player, this);
                 livingEnemies.Add(spawnedEnemy);
@@ -74,7 +80,15 @@ public class StageController : MonoBehaviour
 
         yield return new WaitForSeconds(intermissionDuration);
 
-        TriggerNextWave();
+        if(currentWave == waves.Count)
+        {
+            gameManager.FinishStage();
+        }
+        else
+        {
+            TriggerNextWave();
+        }
+
     }
 
     public void SpawnBoss()

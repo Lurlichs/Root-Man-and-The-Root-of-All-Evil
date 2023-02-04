@@ -46,7 +46,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.7, z: 0.4}
+  m_Size: {x: 2, y: 0.5, z: 0.4}
   m_Center: {x: -0.9, y: 0, z: 0}
 --- !u!54 &8260980253245367833
 Rigidbody:
@@ -76,9 +76,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15f5c0ccd3551c48a4c1f57cdc56a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 8
   player: {fileID: 0}
   stageController: {fileID: 0}
+  rb: {fileID: 8260980253245367833}
+  deathEffect: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
+    type: 3}
   attackFrequency: 5
   wiggleTime: 3
   preAttackSpeed: 6

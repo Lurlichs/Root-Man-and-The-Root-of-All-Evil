@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour
     public Player player;
     public StageController stageController;
 
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] public GameObject deathEffect;
+
     /// <summary>
     /// Use if necessary
     /// </summary>
@@ -31,6 +34,25 @@ public class Enemy : MonoBehaviour
     {
         // Please inherit this as apparently some enemies has a unique death
         stageController.RemoveDeadEnemy(gameObject);
+
+        GameObject spawnEffect = Instantiate(deathEffect);
+        spawnEffect.transform.position = transform.position;
+
         Destroy(gameObject);
+    }
+
+    public void Throw(Vector3 playerTransform)
+    {
+        float force = 10;
+        rb.AddForce(Vector3.up * force, ForceMode.Impulse);
+
+        if (playerTransform.x > transform.position.x)
+        {
+            rb.AddForce(Vector3.left * force, ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(Vector3.right * force, ForceMode.Impulse);
+        }
     }
 }

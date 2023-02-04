@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
             currentSpeed = speed / airDrag;
         }
 
-        if (rb.velocity.y < 0 && currentRecoilTime == 0)
+        if (rb.velocity.y < 0.1f && currentRecoilTime == 0)
         {
             if (currentProjectileStateDuration > 0)
             {
@@ -440,7 +440,16 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Damaging"))
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TryTakeDamage(collision.gameObject.transform.position);
+            collision.gameObject.GetComponent<Enemy>().Throw(transform.position);
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Damaging"))
         {
             TryTakeDamage(collision.gameObject.transform.position);
         }
