@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     {
         this.player = player;
         this.stageController = stageController;
+
+        StartCoroutine(HeightCheck());
     }
 
     public void TakeDamage(float damage)
@@ -57,6 +59,22 @@ public class Enemy : MonoBehaviour
         else
         {
             rb.AddForce(Vector3.right * force, ForceMode.Impulse);
+        }
+    }
+
+    /// <summary>
+    /// If it goes out of bounds, then it dies
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator HeightCheck()
+    {
+        while (true)
+        {
+            if(transform.position.y > 25)
+            {
+                Die();
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
 }

@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffb592de7735a542b2ce84994c524ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 60
   player: {fileID: 0}
   stageController: {fileID: 0}
   rb: {fileID: 2702485830317621521}

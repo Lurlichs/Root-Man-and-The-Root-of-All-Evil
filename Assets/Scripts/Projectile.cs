@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     private bool left;
 
-    private float age = 5;
+    private float age = 0.5f;
 
     public void Setup(float damage, float speed, bool left)
     {

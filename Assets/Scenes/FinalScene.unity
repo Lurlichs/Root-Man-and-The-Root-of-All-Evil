@@ -6276,7 +6276,71 @@ MonoBehaviour:
   spawnParticles: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
   stageNumber: 0
-  waves: []
+  waves:
+  - spawns:
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: 11, y: 4, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: -11, y: 4, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: -11, y: 0, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: 11, y: 0, z: 0}
+  - spawns:
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: 11, y: 4, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: -11, y: 4, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: -11, y: 0, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: 11, y: 0, z: 0}
+    - enemy: {fileID: 8260980253245367828, guid: 5c718ccc8cfd5034da7727c27e0cfad8,
+        type: 3}
+      spawnPos: {x: 14, y: 0, z: 0}
+    - enemy: {fileID: 8260980253245367828, guid: 5c718ccc8cfd5034da7727c27e0cfad8,
+        type: 3}
+      spawnPos: {x: 14, y: 0, z: 0}
+    - enemy: {fileID: 8260980253245367828, guid: 5c718ccc8cfd5034da7727c27e0cfad8,
+        type: 3}
+      spawnPos: {x: 9, y: 4, z: 0}
+    - enemy: {fileID: 8260980253245367828, guid: 5c718ccc8cfd5034da7727c27e0cfad8,
+        type: 3}
+      spawnPos: {x: 9, y: 4, z: 0}
+  - spawns:
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: 11, y: 4, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: -11, y: 4, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: -11, y: 0, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: 11, y: 0, z: 0}
+    - enemy: {fileID: 2702485830317621532, guid: 8626266e6da8caa4e9b6ba9792458313,
+        type: 3}
+      spawnPos: {x: 0, y: 0, z: 0}
+  - spawns:
+    - enemy: {fileID: 8975402790696339599, guid: e4c01789de3422f46ae59a0f0660ab39,
+        type: 3}
+      spawnPos: {x: 0, y: 0, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: 11, y: 4, z: 0}
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
+        type: 3}
+      spawnPos: {x: -11, y: 4, z: 0}
   waveStarted: 0
   currentWave: 0
   livingEnemies: []
@@ -7126,7 +7190,7 @@ MonoBehaviour:
   regenerationCooldown: 15
   projectileCooldown: 0.2
   playerHeight: 2
-  attackDamage: 3
+  attackDamage: 8
   projectileSpeed: 30
   meleeDistance: 1.6
   attackStateDuration: 0.2
@@ -7700,6 +7764,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 454267269}
+    - target: {fileID: 4703604210351024638, guid: 2f3fa9e10071b404d96ab6035b8c89e8,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 444796486}
     - target: {fileID: 6477073981959764292, guid: 2f3fa9e10071b404d96ab6035b8c89e8,
         type: 3}
       propertyPath: m_Name
