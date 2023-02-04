@@ -6,6 +6,8 @@ public class RollerController : Enemy
 {
     public float acceleration = 0.5f;
     public float maximumSpeed = 2.0f;
+    [Tooltip("Whether the roller starts going right")]
+    public bool startRight = true;
 
     private bool isPositive;
     private float currentVelocity;
@@ -19,7 +21,7 @@ public class RollerController : Enemy
     {
         rb = GetComponent<Rigidbody>();
         // Half go right, half go left
-        isPositive = Random.Range(0, 2) < 1;
+        isPositive = startRight;
 
         if (BossScObj != null)
         {
