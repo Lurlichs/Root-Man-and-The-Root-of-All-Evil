@@ -14,6 +14,13 @@ public class LookAhead : MonoBehaviour
     [Tooltip("Show collision check sphere, for debugging")]
     public bool showCollider = false;
 
+    private Collider me;
+
+    public void Start()
+    {
+        me = GetComponent<Collider>();
+    }
+
     // Check if an object moving along a ground is about to hit a wall or fall off the
     // ground.
     // Returns true if it's okay to move forward (i.e. no wall and there's ground)
@@ -53,7 +60,7 @@ public class LookAhead : MonoBehaviour
             {
                 groundInFront = true;
             }
-            else if (collider.tag != "Enemy")
+            else if (collider != me)
             {
                 obstacleInFront = true;
             }

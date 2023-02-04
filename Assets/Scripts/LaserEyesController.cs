@@ -31,6 +31,8 @@ public class LaserEyesController : Enemy
     public float yThreshold = 1.0f;
     [Tooltip("When to return to patrolling, after losing sight of the player")]
     public float returnToPatrolTime = 5.0f;
+    [Tooltip("Player must be within this X distance to provoke attacks")]
+    public float attackDistance = 10.0f;
     [Tooltip("Normalised time to turn laser on in attack animation")]
     public float laserOnTime = 0.33f;
     [Tooltip("Normalised time to turn laser off in attack animation")]
@@ -172,7 +174,8 @@ public class LaserEyesController : Enemy
             if (CanSeePlayer())
             {
                 //Debug.DrawLine(target.position, onionEye.position);
-                if (Mathf.Abs(player.transform.position.y - onionEye.position.y) <= yThreshold)
+                if ((Mathf.Abs(player.transform.position.y - onionEye.position.y) <= yThreshold)
+                 && (Mathf.Abs(player.transform.position.x - onionEye.position.x) <= attackDistance))
                 {
                     // Player is at the same level, attack!
                     animator.ResetTrigger("StartWalking");

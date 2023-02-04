@@ -28,6 +28,8 @@ public class MissileController : Enemy
     public float preAttackHeightMin = 5.0f;
     [Tooltip("Maximum height to rise out of the ground")]
     public float preAttackHeightMax = 15.0f;
+    [Tooltip("Player must be within this X distance to provoke attacks")]
+    public float attackDistance = 20.0f;
 
     private Rigidbody rb;
     private Animator animator;
@@ -78,7 +80,8 @@ public class MissileController : Enemy
         if (currentState == States.IDLE)
         {
             // Check if time to do a new attack
-            if ((Time.fixedTime - lastStateTransition) > attackFrequency)
+            if (((Time.fixedTime - lastStateTransition) > attackFrequency)
+             && (Mathf.Abs(player.transform.position.x - transform.position.x) <= attackDistance))
             {
                 // Start wiggling before changing position
                 animator.ResetTrigger("StopFlying");
