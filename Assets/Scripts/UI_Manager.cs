@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
     public static UI_Manager Instance;
+    [SerializeField] private Player player;
 
     [Header("Health")]
     [SerializeField] private GameObject healthLeaf1;
@@ -35,6 +37,25 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject rootWaveX;
     [SerializeField] private GameObject shieldX;
 
+    [Header("Death Panel")]
+    public GameObject deathPanel;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {
@@ -51,7 +72,26 @@ public class UI_Manager : MonoBehaviour
 
     public void UpdateHealthSetup()
     {
-        //turn off the corresponding leaf
+        if(player.currentHealth == 4)
+        {
+            healthLeaf5.SetActive(false);
+        }
+        if (player.currentHealth == 3)
+        {
+            healthLeaf4.SetActive(false);
+        }
+        if (player.currentHealth == 2)
+        {
+            healthLeaf3.SetActive(false);
+        }
+        if (player.currentHealth == 1)
+        {
+            healthLeaf2.SetActive(false);
+        }
+        if (player.currentHealth == 0)
+        {
+            healthLeaf1.SetActive(false);
+        }
     }
 
     public void TurnOnVictoryPanel()
@@ -115,4 +155,19 @@ public class UI_Manager : MonoBehaviour
         fadeBossBarNow = false;
     }
     #endregion
+
+    public void TurnOnDeathScreen()
+    {
+        
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
+        deathPanel.SetActive(true);
+    }
+
+    public void Reload()
+    {
+        Scene thisScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(thisScene.name);
+
+    }
 }
