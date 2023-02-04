@@ -1486,6 +1486,9 @@ MonoBehaviour:
   maxHealth: 5
   speed: 15
   airDrag: 2
+  recoilTime: 0.3
+  recoilPowerX: 35
+  recoilPowerY: 40
   invulnerabilityTime: 1
   rootWaveCooldown: 8
   regenerationCooldown: 5
@@ -1493,6 +1496,7 @@ MonoBehaviour:
   playerHeight: 2
   projectileDamage: 5
   projectileSpeed: 30
+  projectileStateDuration: 0.3
   jumpPower: 50
   gravityMultiplier: 3.5
   gravityMultiplierFalling: 2
@@ -1507,10 +1511,13 @@ MonoBehaviour:
   regenParticles: {fileID: 0}
   jumpParticles: {fileID: 0}
   punchParticles: {fileID: 0}
+  playerState: 0
   currentHealth: 0
   facingLeft: 0
   currentSpeed: 0
   currentProjectileCooldown: 0
+  currentProjectileStateDuration: 0
+  currentRecoilTime: 0
   currentInvulnerabilityTime: 0
   currentRootWaveCooldown: 0
   currentRegenerationCooldown: 0

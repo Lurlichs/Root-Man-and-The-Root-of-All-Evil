@@ -15,7 +15,7 @@ public class Controls : MonoBehaviour
             float x = Input.GetAxisRaw("Horizontal");
             playerController.MoveDirection(x, Time.deltaTime);*/
 
-            if (!playerController.activatingShield)
+            if (!playerController.activatingShield && playerController.currentRecoilTime == 0)
             {
                 if (Input.GetKey(KeyCode.D))
                 {
@@ -27,12 +27,12 @@ public class Controls : MonoBehaviour
                     playerController.MoveDirection(true, Time.deltaTime);
                 }
 
-                if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0))
                 {
                     playerController.ShootProjectile();
                 }
 
-                if (Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
                 {
                     playerController.Jump();
                 }

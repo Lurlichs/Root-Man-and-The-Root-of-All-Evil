@@ -16,14 +16,36 @@ public class Power
     }
 }
 
+public enum PlayerState
+{
+    Idle,
+    Walking,
+    Jumping,
+    Falling,
+    Shielding,
+    Hurt,
+    RootWave,
+    ShootingIdle,
+    ShootingWalking,
+    ShootingJumping,
+    ShootingFalling
+}
+
 public class Player : MonoBehaviour
 {
     [Header("Modifyable Constants")]
     [SerializeField] private int maxHealth;
+
     [SerializeField] private float speed;
     [SerializeField] private float airDrag;
 
+    // Recoil refers to the animation that plays when player gets hurt
+    [SerializeField] private float recoilTime;
+    [SerializeField] private float recoilPowerX;
+    [SerializeField] private float recoilPowerY;
+    // Refers to how long players get invulnerability when taking damage
     [SerializeField] private float invulnerabilityTime;
+
     [SerializeField] private float rootWaveCooldown;
     [SerializeField] private float regenerationCooldown;
     [SerializeField] private float projectileCooldown;
@@ -32,6 +54,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float projectileDamage;
     [SerializeField] private float projectileSpeed;
+    // How long does the player keep up the "Shooting" state if they are shooting
+    [SerializeField] private float projectileStateDuration;
 
     [SerializeField] private float jumpPower;
     [SerializeField] private float gravityMultiplier;
@@ -66,13 +90,18 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject punchParticles;
 
     [Header("In game states")]
+    [SerializeField] private PlayerState playerState;
+
     [SerializeField] private int currentHealth;
     [SerializeField] private bool facingLeft;
 
     [SerializeField] private float currentSpeed;
 
     [SerializeField] private float currentProjectileCooldown;
+    [SerializeField] private float currentProjectileStateDuration;
+     public float currentRecoilTime;
     [SerializeField] private float currentInvulnerabilityTime;
+
     [SerializeField] private float currentRootWaveCooldown;
     [SerializeField] private float currentRegenerationCooldown;
 
@@ -103,6 +132,16 @@ public class Player : MonoBehaviour
             if(currentInvulnerabilityTime <= 0)
             {
                 currentInvulnerabilityTime = 0;
+            }
+        }
+
+        if(currentRecoilTime > 0)
+        {
+            currentRecoilTime -= time;
+
+            if(currentRecoilTime <= 0)
+            {
+                currentRecoilTime = 0;
             }
         }
 
@@ -137,6 +176,16 @@ public class Player : MonoBehaviour
             }
         }
 
+        if(currentProjectileStateDuration > 0)
+        {
+            currentProjectileStateDuration -= time;
+
+            if(currentProjectileStateDuration <= 0)
+            {
+                currentProjectileStateDuration = 0;
+            }
+        }
+
         if (Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.15f, ground))
         {
             grounded = true;
@@ -149,13 +198,42 @@ public class Player : MonoBehaviour
             currentSpeed = speed / airDrag;
         }
 
-        if(rb.velocity.y < 0)
+        if(rb.velocity.y < 0 && currentRecoilTime == 0)
         {
-            rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier + gravityMultiplierFalling - 1) * Time.deltaTime;
+            if(currentProjectileStateDuration > 0)
+            {
+                playerState = PlayerState.ShootingFalling;
+            }
+            else
+            {
+                playerState = PlayerState.Falling;
+            }
+
+            rb.velocity += (gravityMultiplier + gravityMultiplierFalling - 1) * Physics.gravity.y * time * Vector3.up;
         }
-        else if(rb.velocity.y > 0)
+        else if(rb.velocity.y > 0 && currentRecoilTime == 0)
         {
-            rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier - 1) * Time.deltaTime;
+            if(currentProjectileStateDuration > 0)
+            {
+                playerState = PlayerState.ShootingJumping;
+            }
+            else
+            {
+                playerState = PlayerState.Jumping;
+            }
+
+            rb.velocity += (gravityMultiplier - 1) * Physics.gravity.y * time * Vector3.up;
+        }
+        else if(rb.velocity == Vector3.zero && !activatingShield && currentRecoilTime == 0)
+        {
+            if(currentProjectileStateDuration > 0)
+            {
+                playerState = PlayerState.ShootingIdle;
+            }
+            else
+            {
+                playerState = PlayerState.Idle;
+            }
         }
     }
 
@@ -185,11 +263,25 @@ public class Player : MonoBehaviour
             facingLeft = false;
             transform.position = new Vector3(transform.position.x + currentSpeed * deltaTime, transform.position.y);
         }
+
+        if (grounded)
+        {
+            if(currentProjectileStateDuration > 0)
+            {
+                playerState = PlayerState.ShootingWalking;
+            }
+            else
+            {
+                playerState = PlayerState.Walking;
+            }
+        }
     }
 
     public void ActivateShield()
     {
         activatingShield = true;
+        playerState = PlayerState.Shielding;
+
         // TODO : Effect
     }
 
@@ -205,6 +297,7 @@ public class Player : MonoBehaviour
     {
         if(currentProjectileCooldown == 0)
         {
+            currentProjectileStateDuration = projectileStateDuration;
             currentProjectileCooldown = projectileCooldown;
 
             GameObject projectile = Instantiate(projectilePrefab);
@@ -249,7 +342,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    /// <summary>
+    /// When players take damage, they will receive knockback and enter invulnerability state
+    /// </summary>
+    /// <param name="source">Position of the damage source, in order to calculate the knockback</param>
+    public void TakeDamage(Vector3 source)
     {
         if(currentInvulnerabilityTime == 0 && !activatingShield)
         {
@@ -261,7 +358,25 @@ public class Player : MonoBehaviour
                 return;
             }
 
+            // Handles recoil
+            rb.velocity = new Vector3();
+            rb.AddForce(Vector3.up * recoilPowerY * 0.7f, ForceMode.Impulse);
+
+            if (source.x - transform.position.x > 0)
+            {
+                // Right
+                rb.AddForce(Vector3.right * recoilPowerX * 0.7f, ForceMode.Impulse);
+            }
+            else
+            {
+                // Left
+                rb.AddForce(Vector3.left * recoilPowerX * 0.7f, ForceMode.Impulse);
+            }
+
             currentInvulnerabilityTime = invulnerabilityTime;
+
+            playerState = PlayerState.Hurt;
+            currentRecoilTime = recoilTime;
         }
     }
 
