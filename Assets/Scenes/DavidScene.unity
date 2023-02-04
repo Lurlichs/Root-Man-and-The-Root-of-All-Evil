@@ -256,7 +256,7 @@ Transform:
   - {fileID: 1594975190}
   - {fileID: 407068494}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &407068493
 GameObject:
@@ -462,7 +462,7 @@ Transform:
   m_Children:
   - {fileID: 1034778478}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &925567085
 MonoBehaviour:
@@ -1194,6 +1194,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 1552674375}
+--- !u!1 &1564720169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1564720170}
+  - component: {fileID: 1564720171}
+  m_Layer: 0
+  m_Name: TestWave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1564720170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564720169}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1564720171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564720169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e98aafa94e8f6f47b5f8be97de7a6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intermissionDuration: 5
+  stageNumber: 0
+  waves:
+  - spawns:
+    - enemy: {fileID: 0}
+      spawnPos: {x: 0, y: 0, z: 0}
+    - enemy: {fileID: 0}
+      spawnPos: {x: 0, y: 0, z: 0}
+    - enemy: {fileID: 0}
+      spawnPos: {x: 0, y: 0, z: 0}
+  - spawns: []
+  - spawns: []
+  gameStarted: 0
+  currentWave: 0
+  livingEnemies: []
 --- !u!1 &1594975189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,7 +1573,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &2081878949
 MonoBehaviour:
