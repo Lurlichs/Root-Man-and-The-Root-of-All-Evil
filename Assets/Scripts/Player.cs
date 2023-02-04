@@ -118,6 +118,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject currentShieldObject;
 
+    private Animator animator;
+
 
     /*[Header("Behind the scenes stuff")]
     [SerializeField] private List<Projectile> projectiles;*/
@@ -125,6 +127,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         Setup();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Ticks invulnerabilities and other cooldowns
