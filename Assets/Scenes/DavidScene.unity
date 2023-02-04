@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 11b685adb60e65d41953c598ec4651a7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.48046824, g: 0.9013893, b: 0.89925873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -256,7 +256,7 @@ Transform:
   - {fileID: 1594975190}
   - {fileID: 407068494}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &407068493
 GameObject:
@@ -462,7 +462,7 @@ Transform:
   m_Children:
   - {fileID: 1034778478}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &925567085
 MonoBehaviour:
@@ -1140,9 +1140,9 @@ MonoBehaviour:
   maxHealth: 5
   speed: 15
   airDrag: 2
-  recoilTime: 0.7
-  recoilPowerX: 20
-  recoilPowerY: 28
+  recoilTime: 0.3
+  recoilPowerX: 10
+  recoilPowerY: 16
   invulnerabilityTime: 1
   rootWaveCooldown: 8
   regenerationCooldown: 5
@@ -1163,8 +1163,13 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6017375900199318901, guid: e87f0eecd15f2094bbf9ab5e087798cb,
     type: 3}
   regenParticles: {fileID: 0}
-  jumpParticles: {fileID: 0}
+  jumpParticles: {fileID: 2607568271404831853, guid: 4bc6ff74a274d284fb98c17d1fd74174,
+    type: 3}
   punchParticles: {fileID: 0}
+  shieldPrefab: {fileID: 2792593665014881793, guid: 515e63b442160c74aabf93862a12e557,
+    type: 3}
+  shieldReleasePrefab: {fileID: 2053508665936815216, guid: 16ac5dc11ffb83d4dba784941225cd25,
+    type: 3}
   playerState: 0
   currentHealth: 0
   facingLeft: 0
@@ -1181,6 +1186,7 @@ MonoBehaviour:
   grounded: 0
   doubleJumpAvailable: 0
   activatingShield: 0
+  currentShieldObject: {fileID: 0}
 --- !u!114 &1552674377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1224,7 +1230,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1564720171
 MonoBehaviour:

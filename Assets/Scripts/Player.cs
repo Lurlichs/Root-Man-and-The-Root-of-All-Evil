@@ -89,6 +89,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject regenParticles;
     [SerializeField] private GameObject jumpParticles;
     [SerializeField] private GameObject punchParticles;
+    [SerializeField] private GameObject shieldPrefab;
+    [SerializeField] private GameObject shieldReleasePrefab;
 
     [Header("In game states")]
     public PlayerState playerState;
@@ -111,6 +113,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private bool doubleJumpAvailable;
     public bool activatingShield;
+
+    [SerializeField] private GameObject currentShieldObject;
 
 
     /*[Header("Behind the scenes stuff")]
@@ -292,12 +296,22 @@ public class Player : MonoBehaviour
         activatingShield = true;
         playerState = PlayerState.Shielding;
 
-        // TODO : Effect
+        if(currentShieldObject == null)
+        {
+            currentShieldObject = Instantiate(shieldPrefab);
+            currentShieldObject.transform.position = transform.position;
+            currentShieldObject.transform.SetParent(transform);
+        }
     }
 
     public void DeactivateShield()
     {
         activatingShield = false;
+
+        Destroy(currentShieldObject);
+
+        GameObject particles = Instantiate(shieldReleasePrefab);
+        particles.transform.position = transform.position;
     }
 
     /// <summary>
@@ -325,9 +339,6 @@ public class Player : MonoBehaviour
         if (grounded)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-
-            GameObject cloud = Instantiate(jumpParticles);
-            cloud.transform.position = transform.position;
         }
         else if (doubleJumpAvailable && GetPowerByName("doubleJump").currentlyActive)
         {
