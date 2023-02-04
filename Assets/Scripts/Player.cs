@@ -74,7 +74,8 @@ public class Player : MonoBehaviour
 
     [Header("Powers")]
     private int powersCount;
-    [SerializeField] private List<Power> powers = new List<Power>
+    [SerializeField]
+    private List<Power> powers = new List<Power>
     {
         new Power(0, "regen", true),
         new Power(1, "projectile", true),
@@ -88,18 +89,20 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject regenParticles;
     [SerializeField] private GameObject jumpParticles;
     [SerializeField] private GameObject punchParticles;
+    [SerializeField] private GameObject shieldPrefab;
+    [SerializeField] private GameObject shieldReleasePrefab;
 
     [Header("In game states")]
-    [SerializeField] private PlayerState playerState;
+    public PlayerState playerState;
 
-    [SerializeField] private int currentHealth;
+    public int currentHealth;
     [SerializeField] private bool facingLeft;
 
     [SerializeField] private float currentSpeed;
 
     [SerializeField] private float currentProjectileCooldown;
     [SerializeField] private float currentProjectileStateDuration;
-     public float currentRecoilTime;
+    public float currentRecoilTime;
     [SerializeField] private float currentInvulnerabilityTime;
 
     [SerializeField] private float currentRootWaveCooldown;
@@ -110,6 +113,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private bool doubleJumpAvailable;
     public bool activatingShield;
+
+    [SerializeField] private GameObject currentShieldObject;
 
 
     /*[Header("Behind the scenes stuff")]
@@ -125,21 +130,21 @@ public class Player : MonoBehaviour
     {
         float time = Time.deltaTime;
 
-        if(currentInvulnerabilityTime > 0)
+        if (currentInvulnerabilityTime > 0)
         {
             currentInvulnerabilityTime -= time;
 
-            if(currentInvulnerabilityTime <= 0)
+            if (currentInvulnerabilityTime <= 0)
             {
                 currentInvulnerabilityTime = 0;
             }
         }
 
-        if(currentRecoilTime > 0)
+        if (currentRecoilTime > 0)
         {
             currentRecoilTime -= time;
 
-            if(currentRecoilTime <= 0)
+            if (currentRecoilTime <= 0)
             {
                 currentRecoilTime = 0;
             }
@@ -176,11 +181,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(currentProjectileStateDuration > 0)
+        if (currentProjectileStateDuration > 0)
         {
             currentProjectileStateDuration -= time;
 
-            if(currentProjectileStateDuration <= 0)
+            if (currentProjectileStateDuration <= 0)
             {
                 currentProjectileStateDuration = 0;
             }
@@ -198,9 +203,9 @@ public class Player : MonoBehaviour
             currentSpeed = speed / airDrag;
         }
 
-        if(rb.velocity.y < 0 && currentRecoilTime == 0)
+        if (rb.velocity.y < 0 && currentRecoilTime == 0)
         {
-            if(currentProjectileStateDuration > 0)
+            if (currentProjectileStateDuration > 0)
             {
                 playerState = PlayerState.ShootingFalling;
             }
@@ -211,9 +216,9 @@ public class Player : MonoBehaviour
 
             rb.velocity += (gravityMultiplier + gravityMultiplierFalling - 1) * Physics.gravity.y * time * Vector3.up;
         }
-        else if(rb.velocity.y > 0 && currentRecoilTime == 0)
+        else if (rb.velocity.y > 0 && currentRecoilTime == 0)
         {
-            if(currentProjectileStateDuration > 0)
+            if (currentProjectileStateDuration > 0)
             {
                 playerState = PlayerState.ShootingJumping;
             }
@@ -224,9 +229,9 @@ public class Player : MonoBehaviour
 
             rb.velocity += (gravityMultiplier - 1) * Physics.gravity.y * time * Vector3.up;
         }
-        else if(rb.velocity == Vector3.zero && !activatingShield && currentRecoilTime == 0)
+        else if (rb.velocity == Vector3.zero && !activatingShield && currentRecoilTime == 0)
         {
-            if(currentProjectileStateDuration > 0)
+            if (currentProjectileStateDuration > 0)
             {
                 playerState = PlayerState.ShootingIdle;
             }
@@ -243,12 +248,21 @@ public class Player : MonoBehaviour
         playing = true;
         facingLeft = true;
 
-        foreach(Power power in powers)
+        foreach (Power power in powers)
         {
             power.currentlyActive = true;
         }
 
         currentHealth = maxHealth;
+        rb.velocity = new Vector3();
+
+        currentProjectileCooldown = 0;
+        currentProjectileStateDuration = 0;
+        currentRecoilTime = 0;
+        currentInvulnerabilityTime = 0;
+        currentRootWaveCooldown = 0;
+        currentRegenerationCooldown = 0;
+        doubleJumpAvailable = true;
     }
 
     public void MoveDirection(bool left, float deltaTime)
@@ -266,7 +280,7 @@ public class Player : MonoBehaviour
 
         if (grounded)
         {
-            if(currentProjectileStateDuration > 0)
+            if (currentProjectileStateDuration > 0)
             {
                 playerState = PlayerState.ShootingWalking;
             }
@@ -282,12 +296,22 @@ public class Player : MonoBehaviour
         activatingShield = true;
         playerState = PlayerState.Shielding;
 
-        // TODO : Effect
+        if(currentShieldObject == null)
+        {
+            currentShieldObject = Instantiate(shieldPrefab);
+            currentShieldObject.transform.position = transform.position;
+            currentShieldObject.transform.SetParent(transform);
+        }
     }
 
     public void DeactivateShield()
     {
         activatingShield = false;
+
+        Destroy(currentShieldObject);
+
+        GameObject particles = Instantiate(shieldReleasePrefab);
+        particles.transform.position = transform.position;
     }
 
     /// <summary>
@@ -295,7 +319,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void ShootProjectile()
     {
-        if(currentProjectileCooldown == 0)
+        if (currentProjectileCooldown == 0)
         {
             currentProjectileStateDuration = projectileStateDuration;
             currentProjectileCooldown = projectileCooldown;
@@ -321,6 +345,9 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector3();
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             doubleJumpAvailable = false;
+
+            GameObject cloud = Instantiate(jumpParticles);
+            cloud.transform.position = transform.position;
         }
         else
         {
@@ -330,12 +357,12 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-
+        UI_Manager.Instance.TurnOnDeathScreen();
     }
 
     public void RegenHealth()
     {
-        if(currentHealth < maxHealth)
+        if (currentHealth < maxHealth)
         {
             currentHealth++;
             currentRegenerationCooldown = regenerationCooldown;
@@ -346,11 +373,12 @@ public class Player : MonoBehaviour
     /// When players take damage, they will receive knockback and enter invulnerability state
     /// </summary>
     /// <param name="source">Position of the damage source, in order to calculate the knockback</param>
-    public void TakeDamage(Vector3 source)
+    public void TryTakeDamage(Vector3 source)
     {
-        if(currentInvulnerabilityTime == 0 && !activatingShield)
+        if (currentInvulnerabilityTime == 0 && !activatingShield)
         {
             currentHealth--;
+            UI_Manager.Instance.UpdateHealthSetup();
 
             if (currentHealth <= 0)
             {
@@ -360,23 +388,32 @@ public class Player : MonoBehaviour
 
             // Handles recoil
             rb.velocity = new Vector3();
-            rb.AddForce(Vector3.up * recoilPowerY * 0.7f, ForceMode.Impulse);
+            transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+            rb.AddForce(Vector3.up * recoilPowerY, ForceMode.Impulse);
 
             if (source.x - transform.position.x > 0)
             {
                 // Right
-                rb.AddForce(Vector3.right * recoilPowerX * 0.7f, ForceMode.Impulse);
+                rb.AddForce(Vector3.left * recoilPowerX, ForceMode.Impulse);
             }
             else
             {
                 // Left
-                rb.AddForce(Vector3.left * recoilPowerX * 0.7f, ForceMode.Impulse);
+                rb.AddForce(Vector3.right * recoilPowerX, ForceMode.Impulse);
             }
 
             currentInvulnerabilityTime = invulnerabilityTime;
 
             playerState = PlayerState.Hurt;
             currentRecoilTime = recoilTime;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Damaging"))
+        {
+            TryTakeDamage(collision.gameObject.transform.position);
         }
     }
 
@@ -387,12 +424,12 @@ public class Player : MonoBehaviour
 
     public List<Power> GetRandomAvailablePower(int count)
     {
-        if(powersCount > 0)
+        if (powersCount > 0)
         {
-            List<int> powersInt = new List<int> {0, 1, 2, 3, 4};
+            List<int> powersInt = new List<int> { 0, 1, 2, 3, 4 };
 
             // Remove inactive powers
-            foreach(Power power in powers)
+            foreach (Power power in powers)
             {
                 if (!power.currentlyActive)
                 {
@@ -400,7 +437,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if(powersInt.Count > 0)
+            if (powersInt.Count > 0)
             {
                 for (int i = 0; i < powersInt.Count * 3; i++)
                 {
@@ -413,7 +450,7 @@ public class Player : MonoBehaviour
                 List<Power> newPowers = new List<Power>();
                 int currentCount = 0;
 
-                foreach(int id in powersInt)
+                foreach (int id in powersInt)
                 {
                     if (currentCount < count)
                     {
@@ -432,9 +469,9 @@ public class Player : MonoBehaviour
 
     public Power GetPowerById(int id)
     {
-        foreach(Power power in powers)
+        foreach (Power power in powers)
         {
-            if(power.id == id)
+            if (power.id == id)
             {
                 return power;
             }
@@ -455,7 +492,7 @@ public class Player : MonoBehaviour
 
         return new Power(-1, "", false);
     }
-    
+
     /*
     public void RemoveProjectile(Projectile projectile)
     {

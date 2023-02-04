@@ -11,12 +11,21 @@ public class RollerController : MonoBehaviour
     private float currentVelocity;
     private Rigidbody rb;
 
+    [Header("Leave Blank if not a boss enemy")]
+    [SerializeField] private Bosses_ScriptableObj BossScObj;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         // Half go right, half go left
         isPositive = Random.Range(0, 2) < 1;
+
+        if (BossScObj != null)
+        {
+            //health = BossScObj.baseHealth;
+            UI_Manager.Instance.SetBossHealthBar(BossScObj);
+        }
     }
 
     // Update is called once per frame
