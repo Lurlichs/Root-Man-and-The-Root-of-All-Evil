@@ -60,12 +60,11 @@ public class LookAhead : MonoBehaviour
             {
                 groundInFront = true;
             }
-            else if (collider != me)
+            else if ((collider != me) && !collider.isTrigger)
             {
                 obstacleInFront = true;
             }
         }
-
         if (!groundInFront || obstacleInFront)
         {
             return false;

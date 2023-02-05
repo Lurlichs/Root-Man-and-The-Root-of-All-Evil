@@ -16,7 +16,7 @@ public class RollerController : Enemy
     private float currentVelocity;
     private Rigidbody rb;
     private LookAhead lookahead;
-    private Collider collider;
+    private Collider myCollider;
     private float whenStartedFlying;
 
     [Header("Leave Blank if not a boss enemy")]
@@ -27,9 +27,9 @@ public class RollerController : Enemy
     {
         rb = GetComponent<Rigidbody>();
         lookahead = GetComponent<LookAhead>();
-        if (collider == null)
+        if (myCollider == null)
         {
-            collider = GetComponent<Collider>();
+            myCollider = GetComponent<Collider>();
         }
         // Half go right, half go left
         isPositive = startRight;
@@ -45,11 +45,11 @@ public class RollerController : Enemy
     {
         isFlying = true;
         whenStartedFlying = Time.fixedTime;
-        if (collider == null)
+        if (myCollider == null)
         {
-            collider = GetComponent<Collider>();
+            myCollider = GetComponent<Collider>();
         }
-        collider.enabled = false;
+        myCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -87,7 +87,7 @@ public class RollerController : Enemy
         {
             if ((Time.fixedTime - whenStartedFlying) >= flyIgnoreCollisions)
             {
-                collider.enabled = true;
+                myCollider.enabled = true;
             }
         }
     }
