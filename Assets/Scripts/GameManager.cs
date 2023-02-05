@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //UI_Manager.Instance.
+            UI_Manager.Instance.WinGame();
         }
     }
 

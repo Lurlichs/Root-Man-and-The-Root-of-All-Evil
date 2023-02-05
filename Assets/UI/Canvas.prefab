@@ -4916,6 +4916,7 @@ MonoBehaviour:
   doubleJumpX: {fileID: 8888785918929528241}
   rootWaveX: {fileID: 7189085300656580590}
   shieldX: {fileID: 3645267139899564861}
+  totalVictoryPanel: {fileID: 3048603044477795889}
   pausePanel: {fileID: 8758100688779732748}
   titleUI: {fileID: 3886654176743364547}
   controlsPanel: {fileID: 2895919001936381642}

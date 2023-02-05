@@ -37,6 +37,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject doubleJumpX;
     [SerializeField] private GameObject rootWaveX;
     [SerializeField] private GameObject shieldX;
+    [SerializeField] private GameObject totalVictoryPanel;
 
     [Header("Pause panel")]
     private bool isPaused;
@@ -262,6 +263,10 @@ public class UI_Manager : MonoBehaviour
         controlsPanel.SetActive(false);
     }
 
+    public void WinGame()
+    {
+        totalVictoryPanel.SetActive(true);
+    }
 
     public void TurnOnDeathScreen()
     {
