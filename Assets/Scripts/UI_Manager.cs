@@ -44,6 +44,7 @@ public class UI_Manager : MonoBehaviour
 
     [Header("Title Screen")]
     [SerializeField] private GameObject titleUI;
+    [SerializeField] private GameObject controlsPanel;
 
     [Header("Death Panel")]
     public GameObject deathPanel;
@@ -248,6 +249,15 @@ public class UI_Manager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         titleUI.SetActive(false);
+    }
+
+    public void ShowControls()
+    {
+        controlsPanel.SetActive(true);
+    }
+    public void HideControls()
+    {
+        controlsPanel.SetActive(false);
     }
 
 
