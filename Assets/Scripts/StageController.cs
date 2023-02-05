@@ -101,6 +101,11 @@ public class StageController : MonoBehaviour
 
     }
 
+    public void AddLivingEnemy(GameObject enemy)
+    {
+        livingEnemies.Add(enemy);
+    }
+
     public void RemoveDeadEnemy(GameObject gameObject)
     {
         livingEnemies.Remove(gameObject);

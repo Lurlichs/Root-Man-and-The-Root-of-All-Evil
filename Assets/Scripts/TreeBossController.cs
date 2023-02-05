@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeBossController : MonoBehaviour
+public class TreeBossController : Enemy
 {
 
     public GameObject spike, root;

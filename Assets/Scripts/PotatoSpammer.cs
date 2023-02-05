@@ -31,9 +31,14 @@ public class PotatoSpammer : MonoBehaviour
     IEnumerator SpawnPotatoes()
     {
         yield return new WaitForSeconds(initialDelay);
+        StageController sc = FindObjectOfType<StageController>();
+        Player myPlayer = FindObjectOfType<Player>();
         for (int i = 0; i < numSpawns; i++)
         {
             GameObject g = Instantiate(potatoPrefab, transform);
+            
+            g.GetComponent<Enemy>().Setup(myPlayer, sc);
+            sc.AddLivingEnemy(g);
             g.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
             g.transform.position = transform.position + spawnDisplacement;
             Debug.DrawLine(transform.position, g.transform.position);

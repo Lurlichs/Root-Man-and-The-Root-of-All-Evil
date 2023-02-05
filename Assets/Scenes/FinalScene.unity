@@ -172,7 +172,7 @@ MonoBehaviour:
   player: {fileID: 454267269}
   spawnParticles: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
-  stageNumber: 0
+  stageNumber: 1
   waves:
   - spawns:
     - enemy: {fileID: 8260980253245367828, guid: 5c718ccc8cfd5034da7727c27e0cfad8,
@@ -482,7 +482,7 @@ MonoBehaviour:
   player: {fileID: 454267269}
   spawnParticles: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
-  stageNumber: 0
+  stageNumber: 2
   waves:
   - spawns:
     - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
@@ -603,7 +603,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 444796485}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &57934318
 AudioSource:
@@ -6617,7 +6617,7 @@ MonoBehaviour:
   player: {fileID: 454267269}
   spawnParticles: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
-  stageNumber: 0
+  stageNumber: 3
   waves:
   - spawns:
     - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
@@ -7520,6 +7520,7 @@ Transform:
   - {fileID: 6449199}
   - {fileID: 46775648}
   - {fileID: 323286085}
+  - {fileID: 1604122734}
   - {fileID: 57934317}
   - {fileID: 457310373}
   m_Father: {fileID: 0}
@@ -7543,6 +7544,7 @@ MonoBehaviour:
   - {fileID: 6449200}
   - {fileID: 46775649}
   - {fileID: 323286086}
+  - {fileID: 1604122733}
   environments:
   - {fileID: 10532818}
   - {fileID: 1038356723}
@@ -7885,7 +7887,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 444796485}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &457310374
 MonoBehaviour:
@@ -15781,6 +15783,63 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1588817402}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1604122732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1604122734}
+  - component: {fileID: 1604122733}
+  m_Layer: 0
+  m_Name: Wave 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1604122733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604122732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e98aafa94e8f6f47b5f8be97de7a6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 444796486}
+  intermissionDuration: 3
+  player: {fileID: 454267269}
+  spawnParticles: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
+    type: 3}
+  stageNumber: 4
+  waves:
+  - spawns:
+    - enemy: {fileID: 23277807649979601, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5, type: 3}
+      spawnPos: {x: 11, y: 0, z: 0}
+  waveStarted: 0
+  currentWave: 0
+  livingEnemies: []
+--- !u!4 &1604122734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604122732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 444796485}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1605503640
 PrefabInstance:
   m_ObjectHideFlags: 0
