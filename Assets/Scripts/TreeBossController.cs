@@ -95,7 +95,7 @@ public class TreeBossController : MonoBehaviour
                         return false; // lockout
                     }
                     animator.SetTrigger("StartSpike");
-                    rootWave.Spawn();
+                    rootWave.Spawn(true);
                     lastSpike = Time.fixedTime;
                 }
                 else

@@ -45,6 +45,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7691469566062733059}
   - component: {fileID: 4040787955106655580}
+  - component: {fileID: 8912572575769524120}
   m_Layer: 7
   m_Name: GameObject (1)
   m_TagString: Damaging
@@ -80,6 +81,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06, y: 0.1, z: 0.1}
   m_Center: {x: 0.255, y: 0, z: 0}
+--- !u!114 &8912572575769524120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383688148203909515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd49013ef4b9ffc4e898c18802a4878f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &3987622797212205587
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5713402031906003718}
   - component: {fileID: 5900260989331586526}
+  - component: {fileID: 2932768836960463032}
   m_Layer: 7
   m_Name: GameObject
   m_TagString: Damaging
@@ -125,6 +140,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.1, z: 0.1}
   m_Center: {x: 0.25, y: 0, z: 0}
+--- !u!114 &2932768836960463032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3987622797212205587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd49013ef4b9ffc4e898c18802a4878f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &4329808208691645257
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7199783470764700777}
   - component: {fileID: 257304772339587924}
+  - component: {fileID: 6666529810663012949}
   m_Layer: 7
   m_Name: GameObject (2)
   m_TagString: Damaging
@@ -202,6 +231,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06, y: 0.1, z: 0.1}
   m_Center: {x: 0.26, y: 0, z: 0}
+--- !u!114 &6666529810663012949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5371795982684981660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd49013ef4b9ffc4e898c18802a4878f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &7173680665883000687
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461803933405890433}
   - component: {fileID: 2112457221357387812}
+  - component: {fileID: 1519396501843356517}
   m_Layer: 7
   m_Name: GameObject (3)
   m_TagString: Damaging
@@ -247,6 +290,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06, y: 0.1, z: 0.1}
   m_Center: {x: 0.26, y: 0, z: 0}
+--- !u!114 &1519396501843356517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173680665883000687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd49013ef4b9ffc4e898c18802a4878f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1001 &1177489937
 PrefabInstance:
   m_ObjectHideFlags: 0
