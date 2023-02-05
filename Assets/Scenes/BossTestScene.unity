@@ -777,17 +777,17 @@ PrefabInstance:
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfLaugh
-      value: 0.9
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfSpike
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfSpecialIdle
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1107897357665298954, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}

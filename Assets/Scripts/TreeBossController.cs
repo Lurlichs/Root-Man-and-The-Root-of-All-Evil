@@ -29,13 +29,17 @@ public class TreeBossController : MonoBehaviour
     public float chanceOfMelee = 0.05f;
     [Tooltip("Seconds to lock out spike or root attacks after a spike or root attack")]
     public float spikeLockout = 5.0f;
+    [Tooltip("Seconds to lock out spit attacks after a spit attack")]
+    public float spitLockout = 5.0f;
 
     private Animator animator;
     private RootWaveSpawn rootWave;
     private RootSpikeSpawn rootSpike;
+    private PotatoSpammer potatoSpammer;
 
     private States currentState;
     private float lastSpike;
+    private float lastSpit;
 
     [Header("Leave Blank if not a boss enemy")]
     [SerializeField] private Bosses_ScriptableObj BossScObj;
@@ -47,6 +51,7 @@ public class TreeBossController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rootWave = GetComponent<RootWaveSpawn>();
         rootSpike = GetComponent<RootSpikeSpawn>();
+        potatoSpammer = GetComponent<PotatoSpammer>();
         animator.SetTrigger("StartLaugh");
         // Because the animator is in a child object, we can't get it to call a function here,
         // instead, use AnimationEventsHandler to forward the calls to our AnimationClipEnded method
@@ -84,7 +89,6 @@ public class TreeBossController : MonoBehaviour
                 {
                     return false; // lockout
                 }
-                Debug.Log("StartLaugh");
                 animator.SetTrigger("StartLaugh");
                 rootSpike.Spawn();
                 lastSpike = Time.fixedTime;
@@ -107,7 +111,13 @@ public class TreeBossController : MonoBehaviour
                     randomVar -= chanceOfSpike;
                     if (randomVar < chanceOfSpit)
                     {
+                        if ((Time.fixedTime - lastSpit) < spitLockout)
+                        {
+                            return false; // lockout
+                        }
                         animator.SetTrigger("StartSpit");
+                        potatoSpammer.Spawn();
+                        lastSpit = Time.fixedTime;
                     }
                     else
                     {

@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 23277807649979615}
   - component: {fileID: 4856363347904904803}
   - component: {fileID: 7708893993313149470}
+  - component: {fileID: 6708470962637682533}
   - component: {fileID: 3770758557608109406}
   m_Layer: 0
   m_Name: TreeBoss
@@ -103,6 +104,7 @@ MonoBehaviour:
   chanceOfSpit: 0.1
   chanceOfMelee: 0.1
   spikeLockout: 8
+  spitLockout: 5
   BossScObj: {fileID: 0}
 --- !u!114 &4856363347904904803
 MonoBehaviour:
@@ -143,6 +145,27 @@ MonoBehaviour:
   rootSpikeDistance: 4
   initialDistanceFactor: 3
   rootSpikePrefab: {fileID: 1396250162364260641, guid: 9a61359e32e7c374a93d60af9344f8fd,
+    type: 3}
+--- !u!114 &6708470962637682533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23277807649979601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb11b1b23e0f194088cd2889a798245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numSpawns: 4
+  initialDelay: 3
+  spawnTimeInterval: 0.2
+  potatoSpeed: 20
+  minAngle: 20
+  maxAngle: 40
+  spawnDisplacement: {x: 0, y: 9, z: 0}
+  potatoPrefab: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
     type: 3}
 --- !u!65 &3770758557608109406
 BoxCollider:

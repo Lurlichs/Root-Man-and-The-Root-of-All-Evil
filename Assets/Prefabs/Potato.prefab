@@ -139,6 +139,8 @@ MonoBehaviour:
   acceleration: 5
   maximumSpeed: 5
   startRight: 1
+  flyIgnoreCollisions: 0.5
+  isFlying: 0
   BossScObj: {fileID: 0}
 --- !u!114 &4134442384279228947
 MonoBehaviour:
