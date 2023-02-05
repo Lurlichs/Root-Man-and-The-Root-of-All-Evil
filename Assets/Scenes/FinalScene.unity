@@ -728,18 +728,18 @@ MonoBehaviour:
     alias: shieldBlock
   - audioClip: {fileID: 8300000, guid: 4bedf018e8514e544bb930023cdb2030, type: 3}
     alias: shieldDeactivate
-  - audioClip: {fileID: 8300000, guid: dcc9361d5e66a21498f6897592796071, type: 3}
+  - audioClip: {fileID: 8300000, guid: 3dbd6c207e4681843a00e5e4c08f11fa, type: 3}
     alias: enemyHit
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
+  - audioClip: {fileID: 8300000, guid: c3a5f6a6e2cbd9b4290086287ca97664, type: 3}
+    alias: click
+  - audioClip: {fileID: 8300000, guid: df350745ff1f7a94e980c262089a67f6, type: 3}
+    alias: death
+  - audioClip: {fileID: 8300000, guid: 0d699ddebddc7ce468b44135c6d7f469, type: 3}
+    alias: enemyDeath
+  - audioClip: {fileID: 8300000, guid: 13156afdaa8c9f34b973885939ec7d23, type: 3}
+    alias: rootWave
+  - audioClip: {fileID: 8300000, guid: 8d5961200b9c2f0448fdce919bd582d0, type: 3}
+    alias: melee
   - audioClip: {fileID: 0}
     alias: 
   - audioClip: {fileID: 0}

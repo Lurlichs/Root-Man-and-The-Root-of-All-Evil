@@ -42,6 +42,8 @@ public class Enemy : MonoBehaviour
         GameObject spawnEffect = Instantiate(deathEffect);
         spawnEffect.transform.position = transform.position;
 
+        //AudioPlayer.Instance.PlayClip("enemyDeath", 1f, true);
+
         //UI_Manager.Instance.FadeOutBossBar();
 
         Destroy(gameObject);

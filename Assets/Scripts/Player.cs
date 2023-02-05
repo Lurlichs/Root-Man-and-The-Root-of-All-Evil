@@ -311,7 +311,9 @@ public class Player : MonoBehaviour
             GameObject effect = Instantiate(rootWavePrefab);
             effect.transform.position = transform.position;
 
-            foreach(GameObject enemyObj in et.objects)
+            AudioPlayer.Instance.PlayClip("rootWave", 1, true);
+
+            foreach (GameObject enemyObj in et.objects)
             {
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
                 enemy.TakeDamage(rootWaveDamage);
@@ -408,6 +410,8 @@ public class Player : MonoBehaviour
 
                 meleeHit.Setup(attackDamage, facingLeft);
 
+                AudioPlayer.Instance.PlayClip("melee", 1, true);
+
                 meleeHit.transform.position = transform.position;
                 if(facingLeft) {
                     meleeHit.transform.position = new Vector3(meleeHit.transform.position.x - meleeDistance, 
@@ -448,6 +452,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        AudioPlayer.Instance.PlayClip("death", 1, true);
         UI_Manager.Instance.TurnOnDeathScreen();
     }
 

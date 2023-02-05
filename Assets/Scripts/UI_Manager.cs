@@ -142,6 +142,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void TurnOffVictoryPanel()
     {
+        AudioPlayer.Instance.PlayClip("click", 1, true);
         victoryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         FadeOutBossBar();
@@ -230,6 +231,7 @@ public class UI_Manager : MonoBehaviour
 
     public void Resume()
     {
+        AudioPlayer.Instance.PlayClip("click", 1, true);
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
