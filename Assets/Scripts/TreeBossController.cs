@@ -32,6 +32,14 @@ public class TreeBossController : MonoBehaviour
     [Tooltip("Seconds to lock out spit attacks after a spit attack")]
     public float spitLockout = 5.0f;
 
+    [Header("Melee attack parameters")]
+    [Tooltip("Normalised time in the animation to activate melee hit box")]
+    public float meleeStartProportion = 0.33f;
+    [Tooltip("Normalised time in the animation to deactivate melee hit box")]
+    public float meleeEndProportion = 0.33f;
+    [Tooltip("Put melee attack collider box here")]
+    public Collider meleeCollider;
+
     private Animator animator;
     private RootWaveSpawn rootWave;
     private RootSpikeSpawn rootSpike;
@@ -52,6 +60,7 @@ public class TreeBossController : MonoBehaviour
         rootWave = GetComponent<RootWaveSpawn>();
         rootSpike = GetComponent<RootSpikeSpawn>();
         potatoSpammer = GetComponent<PotatoSpammer>();
+        meleeCollider.enabled = false;
         animator.SetTrigger("StartLaugh");
         // Because the animator is in a child object, we can't get it to call a function here,
         // instead, use AnimationEventsHandler to forward the calls to our AnimationClipEnded method
@@ -125,12 +134,30 @@ public class TreeBossController : MonoBehaviour
                         if (randomVar < chanceOfMelee)
                         {
                             animator.SetTrigger("StartMelee");
+                            meleeCollider.enabled = false;
                         }
                     }
                 }
             }
         }
         return true;
+    }
+
+    private void FixedUpdate()
+    {
+        // Check if melee hitbox needs to be activated or deactivated
+        AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0);
+        if (animState.IsName("TreeCloseAttack"))
+        {
+            if (!meleeCollider.enabled && (animState.normalizedTime >= meleeStartProportion))
+            {
+                meleeCollider.enabled = true;
+            }
+            if (meleeCollider.enabled && (animState.normalizedTime >= meleeEndProportion))
+            {
+                meleeCollider.enabled = false;
+            }
+        }
     }
 
     private void AnimationClipEnded(string clipName)
