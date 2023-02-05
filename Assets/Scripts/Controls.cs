@@ -43,6 +43,11 @@ public class Controls : MonoBehaviour
                 {
                     playerController.Jump();
                 }
+
+                if (Input.GetMouseButton(1) && playerController.GetPowerByName("rootWave").currentlyActive)
+                {
+                    playerController.RootWave();
+                }
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && playerController.GetPowerByName("shield").currentlyActive)

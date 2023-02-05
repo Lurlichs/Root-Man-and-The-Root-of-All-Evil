@@ -62,10 +62,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float gravityMultiplier;
     [SerializeField] private float gravityMultiplierFalling;
 
+    [SerializeField] private float rootWaveDamage;
+
     [Header("Object")]
     [SerializeField] private GameObject player;
     [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private EnemyTracker et;
 
     [SerializeField] private GameObject leaf;
 
@@ -93,6 +96,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject punchParticles;
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private GameObject shieldReleasePrefab;
+    [SerializeField] private GameObject rootWavePrefab;
 
     [Header("In game states")]
     public PlayerState playerState;
@@ -300,6 +304,23 @@ public class Player : MonoBehaviour
         doubleJumpAvailable = true;
     }
 
+    public void RootWave()
+    {
+        if(currentRootWaveCooldown == 0)
+        {
+            GameObject effect = Instantiate(rootWavePrefab);
+            effect.transform.position = transform.position;
+
+            foreach(GameObject enemyObj in et.objects)
+            {
+                Enemy enemy = enemyObj.GetComponent<Enemy>();
+                enemy.TakeDamage(rootWaveDamage);
+            }
+
+            currentRootWaveCooldown = rootWaveCooldown;
+        }
+    }
+
     public void MoveDirection(bool left, float deltaTime)
     {
         if (left)
@@ -335,6 +356,7 @@ public class Player : MonoBehaviour
 
         if(currentShieldObject == null)
         {
+            AudioPlayer.Instance.PlayClip("shieldActive", 1f, true);
             currentShieldObject = Instantiate(shieldPrefab);
             currentShieldObject.transform.position = transform.position;
             currentShieldObject.transform.SetParent(transform);
@@ -344,6 +366,8 @@ public class Player : MonoBehaviour
     public void DeactivateShield()
     {
         activatingShield = false;
+
+        AudioPlayer.Instance.PlayClip("shieldDeactivate");
 
         Destroy(currentShieldObject);
 
@@ -361,6 +385,8 @@ public class Player : MonoBehaviour
             // Ranged attack
             if (GetPowerByName("projectile").currentlyActive)
             {
+                AudioPlayer.Instance.PlayClip("projectile", 1, true);
+
                 currentProjectileStateDuration = attackStateDuration;
                 currentAttackCooldown = projectileCooldown;
 
@@ -401,6 +427,7 @@ public class Player : MonoBehaviour
         if (grounded)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            AudioPlayer.Instance.PlayClip("jump", 0.3f, true);
         }
         else if (doubleJumpAvailable && GetPowerByName("doubleJump").currentlyActive)
         {
@@ -410,6 +437,8 @@ public class Player : MonoBehaviour
 
             GameObject cloud = Instantiate(jumpParticles);
             cloud.transform.position = transform.position;
+            
+            AudioPlayer.Instance.PlayClip("jump", 0.3f, true);
         }
         else
         {
@@ -443,6 +472,8 @@ public class Player : MonoBehaviour
     {
         if (currentInvulnerabilityTime == 0 && !activatingShield)
         {
+            AudioPlayer.Instance.PlayClip("playerHit", 1, true);
+
             currentHealth--;
             UI_Manager.Instance.UpdateHealthSetup();
 
@@ -472,6 +503,10 @@ public class Player : MonoBehaviour
 
             playerState = PlayerState.Hurt;
             currentRecoilTime = recoilTime;
+        }
+        else if (activatingShield && currentInvulnerabilityTime == 0)
+        {
+            AudioPlayer.Instance.PlayClip("shieldBlock");
         }
     }
 

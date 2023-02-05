@@ -30,9 +30,12 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private AudioSource speaker;
     [SerializeField] private Player player;
 
+    [SerializeField] private float vol;
+
     void Awake()
     {
         Instance = this;
+        FullVolume();
     }
 
     public void AssignPlayer(Player player)
@@ -56,7 +59,7 @@ public class MusicPlayer : MonoBehaviour
         {
             current += Time.deltaTime / duration;
 
-            speaker.volume = 1 - current;
+            speaker.volume = (1 - current) * vol;
 
             yield return new WaitForEndOfFrame();
         }
@@ -76,7 +79,7 @@ public class MusicPlayer : MonoBehaviour
         {
             current += Time.deltaTime / duration;
 
-            speaker.volume = current;
+            speaker.volume = current * vol;
 
             yield return new WaitForEndOfFrame();
         }
@@ -128,6 +131,6 @@ public class MusicPlayer : MonoBehaviour
 
     public void FullVolume()
     {
-        speaker.volume = 1;
+        speaker.volume = vol;
     }
 }

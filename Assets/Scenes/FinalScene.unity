@@ -713,6 +713,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ba5f9e0b1c73447a179171044054a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clips:
+  - audioClip: {fileID: 8300000, guid: 73bcaceb751a7184dab92af3bb8945ee, type: 3}
+    alias: playerHit
+  - audioClip: {fileID: 8300000, guid: dbcb1d91e36d4c14882c9f8c5a0df1b1, type: 3}
+    alias: jump
+  - audioClip: {fileID: 8300000, guid: 3dad93b5db483f74193485b04bfa27f3, type: 3}
+    alias: landing
+  - audioClip: {fileID: 8300000, guid: 5bfdbd6bb3a1c9747b23e5dbf766bb93, type: 3}
+    alias: projectile
+  - audioClip: {fileID: 8300000, guid: 85bee73efd6b1e648a5205522ed1beee, type: 3}
+    alias: shieldActive
+  - audioClip: {fileID: 8300000, guid: 34667e4448cfbca4198a85fe5807d96d, type: 3}
+    alias: shieldBlock
+  - audioClip: {fileID: 8300000, guid: 4bedf018e8514e544bb930023cdb2030, type: 3}
+    alias: shieldDeactivate
+  - audioClip: {fileID: 8300000, guid: dcc9361d5e66a21498f6897592796071, type: 3}
+    alias: enemyHit
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 0}
+    alias: 
   speaker: {fileID: 57934318}
 --- !u!1 &68289740
 GameObject:
@@ -7508,7 +7549,7 @@ MonoBehaviour:
   - {fileID: 1330289877}
   - {fileID: 417191565}
   - {fileID: 1430336695}
-  player: {fileID: 0}
+  player: {fileID: 454267269}
 --- !u!1 &453826845
 GameObject:
   m_ObjectHideFlags: 0
@@ -7661,7 +7702,7 @@ MonoBehaviour:
   recoilPowerX: 10
   recoilPowerY: 16
   invulnerabilityTime: 1.5
-  rootWaveCooldown: 8
+  rootWaveCooldown: 10
   regenerationCooldown: 15
   projectileCooldown: 0.2
   playerHeight: 2
@@ -7672,9 +7713,11 @@ MonoBehaviour:
   jumpPower: 55
   gravityMultiplier: 3.5
   gravityMultiplierFalling: 2
+  rootWaveDamage: 10
   player: {fileID: 454267267}
   capsuleCollider: {fileID: 454267271}
   rb: {fileID: 454267270}
+  et: {fileID: 1629648470}
   leaf: {fileID: 0}
   alive: 0
   playing: 0
@@ -7690,6 +7733,8 @@ MonoBehaviour:
   shieldPrefab: {fileID: 2792593665014881793, guid: 515e63b442160c74aabf93862a12e557,
     type: 3}
   shieldReleasePrefab: {fileID: 2053508665936815216, guid: 16ac5dc11ffb83d4dba784941225cd25,
+    type: 3}
+  rootWavePrefab: {fileID: 1568776121945576482, guid: f272022f0ea290e4e8a849fd84d61b5d,
     type: 3}
   playerState: 0
   currentHealth: 0
@@ -7805,6 +7850,7 @@ Transform:
   - {fileID: 376135748}
   - {fileID: 2064973633}
   - {fileID: 163077212}
+  - {fileID: 1629648468}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7866,6 +7912,7 @@ MonoBehaviour:
     main: {fileID: 8300000, guid: 25cc5ee080c82074f8ef21c5248edf05, type: 3}
   speaker: {fileID: 457310375}
   player: {fileID: 454267269}
+  vol: 0.6
 --- !u!82 &457310375
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8880,6 +8927,11 @@ PrefabInstance:
     - target: {fileID: 1426858782361514994, guid: 2f3fa9e10071b404d96ab6035b8c89e8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048603044477795889, guid: 2f3fa9e10071b404d96ab6035b8c89e8,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4703604210351024638, guid: 2f3fa9e10071b404d96ab6035b8c89e8,
@@ -16900,6 +16952,82 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619397892}
   m_Mesh: {fileID: 5302568919011541938, guid: 417b6d339b84e4c4cab08fae37e3dfe4, type: 3}
+--- !u!1 &1629648467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1629648468}
+  - component: {fileID: 1629648469}
+  - component: {fileID: 1629648470}
+  - component: {fileID: 1629648471}
+  m_Layer: 0
+  m_Name: RootWaveCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1629648468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629648467}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 454267274}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1629648469
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629648467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1629648470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629648467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d918c6cb4d6e70f45a79d9ae29dd5823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects: []
+--- !u!54 &1629648471
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629648467}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1653304212
 GameObject:
   m_ObjectHideFlags: 0
