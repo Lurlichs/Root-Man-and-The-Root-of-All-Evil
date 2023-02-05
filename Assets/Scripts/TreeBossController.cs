@@ -32,6 +32,7 @@ public class TreeBossController : MonoBehaviour
 
     private Animator animator;
     private RootWaveSpawn rootWave;
+    private RootSpikeSpawn rootSpike;
 
     private States currentState;
     private float lastSpike;
@@ -45,6 +46,7 @@ public class TreeBossController : MonoBehaviour
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
         rootWave = GetComponent<RootWaveSpawn>();
+        rootSpike = GetComponent<RootSpikeSpawn>();
         animator.SetTrigger("StartLaugh");
         // Because the animator is in a child object, we can't get it to call a function here,
         // instead, use AnimationEventsHandler to forward the calls to our AnimationClipEnded method
@@ -82,7 +84,9 @@ public class TreeBossController : MonoBehaviour
                 {
                     return false; // lockout
                 }
+                Debug.Log("StartLaugh");
                 animator.SetTrigger("StartLaugh");
+                rootSpike.Spawn();
                 lastSpike = Time.fixedTime;
             }
             else
@@ -128,12 +132,4 @@ public class TreeBossController : MonoBehaviour
             successful = chooseNewState();
         } while (!successful);
     }
-
-    public void SpikeWave()
-    {
-        print("hello");
-    }
-        
-    }
-
-  
+}
