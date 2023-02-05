@@ -12,11 +12,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        MusicPlayer.Instance.Play(0);
         StartNextStage();
     }
 
     public void StartNextStage()
     {
+        if(currentStage != 0)
+        {
+            MusicPlayer.Instance.FadePlay(currentStage);
+        }
+
         DisableAllEnvironments();
         stages[currentStage].Setup();
         environments[currentStage].SetActive(true);

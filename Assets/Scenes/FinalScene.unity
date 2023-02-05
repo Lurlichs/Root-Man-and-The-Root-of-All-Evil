@@ -305,7 +305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &10532819
 Transform:
   m_ObjectHideFlags: 0
@@ -490,10 +490,7 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 4, z: 0}
     - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
         type: 3}
-      spawnPos: {x: 8, y: 0, z: 0}
-    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
-        type: 3}
-      spawnPos: {x: -8, y: 0, z: 0}
+      spawnPos: {x: 0, y: 0, z: 0}
     - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
         type: 3}
       spawnPos: {x: 4, y: 0, z: 0}
@@ -530,27 +527,24 @@ MonoBehaviour:
       spawnPos: {x: -8, y: 0, z: 0}
     - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
         type: 3}
-      spawnPos: {x: 0, y: 0, z: 0}
-    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
-        type: 3}
       spawnPos: {x: -8, y: 0, z: 0}
   - spawns:
-    - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
+    - enemy: {fileID: 2702485830317621532, guid: e6f19c32add7c114ab35f1658a1762b8,
         type: 3}
       spawnPos: {x: -15, y: 0, z: 0}
-    - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
+    - enemy: {fileID: 2702485830317621532, guid: e6f19c32add7c114ab35f1658a1762b8,
         type: 3}
       spawnPos: {x: -12, y: 0, z: 0}
-    - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
+    - enemy: {fileID: 2702485830317621532, guid: e6f19c32add7c114ab35f1658a1762b8,
         type: 3}
       spawnPos: {x: -9, y: 0, z: 0}
-    - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
+    - enemy: {fileID: 2702485830317621532, guid: e6f19c32add7c114ab35f1658a1762b8,
         type: 3}
       spawnPos: {x: -6, y: 0, z: 0}
-    - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
+    - enemy: {fileID: 2702485830317621532, guid: e6f19c32add7c114ab35f1658a1762b8,
         type: 3}
       spawnPos: {x: -3, y: 0, z: 0}
-    - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
+    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
         type: 3}
       spawnPos: {x: 0, y: 0, z: 0}
     - enemy: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
@@ -6593,10 +6587,7 @@ MonoBehaviour:
       spawnPos: {x: -11, y: 4, z: 0}
     - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
         type: 3}
-      spawnPos: {x: -11, y: 0, z: 0}
-    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
-        type: 3}
-      spawnPos: {x: 11, y: 0, z: 0}
+      spawnPos: {x: 0, y: 0, z: 0}
   - spawns:
     - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
         type: 3}
@@ -6604,12 +6595,6 @@ MonoBehaviour:
     - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
         type: 3}
       spawnPos: {x: -11, y: 4, z: 0}
-    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
-        type: 3}
-      spawnPos: {x: -11, y: 0, z: 0}
-    - enemy: {fileID: 8975402790696339599, guid: e6c5d94959eb57841aa04ed65cfe03ee,
-        type: 3}
-      spawnPos: {x: 11, y: 0, z: 0}
     - enemy: {fileID: 8260980253245367828, guid: 5c718ccc8cfd5034da7727c27e0cfad8,
         type: 3}
       spawnPos: {x: 14, y: 0, z: 0}
@@ -7677,10 +7662,10 @@ MonoBehaviour:
   recoilPowerY: 16
   invulnerabilityTime: 1.5
   rootWaveCooldown: 8
-  regenerationCooldown: 10
+  regenerationCooldown: 15
   projectileCooldown: 0.2
   playerHeight: 2
-  attackDamage: 8
+  attackDamage: 2
   projectileSpeed: 30
   meleeDistance: 1.6
   attackStateDuration: 0.4
@@ -7833,6 +7818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 457310373}
   - component: {fileID: 457310374}
+  - component: {fileID: 457310375}
   m_Layer: 0
   m_Name: MusicController
   m_TagString: Untagged
@@ -7867,8 +7853,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09b74d117c83654a9968c9a90891760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: []
-  player: {fileID: 0}
+  soundtracks:
+  - id: 0
+    main: {fileID: 8300000, guid: 3aeead75c4e68304ba02b8245411be0f, type: 3}
+  - id: 1
+    main: {fileID: 8300000, guid: 4b8a0c22c6165c5458e424f09584d71b, type: 3}
+  - id: 2
+    main: {fileID: 8300000, guid: 0740312906f71194ca45651494ee1254, type: 3}
+  - id: 3
+    main: {fileID: 8300000, guid: 5f0636048ba411d46acb0e6ad563218d, type: 3}
+  - id: 4
+    main: {fileID: 8300000, guid: 25cc5ee080c82074f8ef21c5248edf05, type: 3}
+  speaker: {fileID: 457310375}
+  player: {fileID: 454267269}
+--- !u!82 &457310375
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457310372}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &460837728
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     private float speed;
     private bool left;
 
+    [SerializeField] private GameObject hitEffect;
+
     private float age = 0.5f;
 
     public void Setup(float damage, float speed, bool left)
@@ -41,6 +43,10 @@ public class Projectile : MonoBehaviour
     private void HitTarget(GameObject enemy)
     {
         enemy.GetComponent<Enemy>().TakeDamage(damage);
+
+        GameObject hit = Instantiate(hitEffect);
+        hit.transform.position = transform.position;
+
         Die();
     }
 

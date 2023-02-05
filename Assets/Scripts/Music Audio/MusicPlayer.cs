@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct Music
 {
-    public string alias;
+    public int id;
 
     public AudioClip main;
-
+    
+    /*
     public AudioClip regen;
     public AudioClip projectile;
     public AudioClip doubleJump;
     public AudioClip rootWave;
-    public AudioClip shield;
+    public AudioClip shield;*/
 }
 
 /// <summary>
@@ -25,7 +27,7 @@ public class MusicPlayer : MonoBehaviour
 
     [SerializeField] private List<Music> soundtracks;
 
-    [SerializeField] private List<AudioSource> speakers;
+    [SerializeField] private AudioSource speaker;
     [SerializeField] private Player player;
 
     void Awake()
@@ -41,12 +43,12 @@ public class MusicPlayer : MonoBehaviour
     /// <summary>
     /// Use this when you want to play a song when another one is currently is playing.
     /// </summary>
-    public void FadePlay(string alias, float duration = 1, float intermission = 1)
+    public void FadePlay(int id, float duration = 1, float intermission = 1)
     {
-        StartCoroutine(FadeOut(alias, duration, intermission));
+        StartCoroutine(FadeOut(id, duration, intermission));
     }
 
-    public IEnumerator FadeOut(string alias, float duration, float intermission)
+    public IEnumerator FadeOut(int id, float duration, float intermission)
     {
         float current = 0;
 
@@ -54,20 +56,33 @@ public class MusicPlayer : MonoBehaviour
         {
             current += Time.deltaTime / duration;
 
-            foreach (AudioSource speaker in speakers)
-            {
-                speaker.volume = 1 - current;
-            }
+            speaker.volume = 1 - current;
 
             yield return new WaitForEndOfFrame();
         }
 
         yield return new WaitForSeconds(intermission);
 
-        Play(alias);
+        StartCoroutine(FadeInVolume(duration));
+        Play(id);
     }
 
-    public void Play(string alias)
+    // Fade in but only for volume
+    public IEnumerator FadeInVolume(float duration)
+    {
+        float current = 0;
+
+        while (current < 1)
+        {
+            current += Time.deltaTime / duration;
+
+            speaker.volume = current;
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public void Play(int id)
     {
         FullVolume();
 
@@ -75,8 +90,9 @@ public class MusicPlayer : MonoBehaviour
 
         foreach(Music music in soundtracks)
         {
-            if(music.alias == alias)
+            if(music.id == id)
             {
+                /*
                 soundtrack = music;
 
                 speakers[0].clip = soundtrack.main;
@@ -95,24 +111,23 @@ public class MusicPlayer : MonoBehaviour
                 if (player.GetPowerByName("rootWave").currentlyActive) { speakers[4].Play(); }
                 if (player.GetPowerByName("shield").currentlyActive) { speakers[5].Play(); }
 
-                break;
+                break;*/
+
+                soundtrack = music;
+
+                speaker.clip = soundtrack.main;
+                speaker.Play();
             }
         }
     }
 
     public void Mute()
     {
-        foreach (AudioSource speaker in speakers)
-        {
-            speaker.volume = 0;
-        }
+        speaker.volume = 0;
     }
 
     public void FullVolume()
     {
-        foreach (AudioSource speaker in speakers)
-        {
-            speaker.volume = 1;
-        }
+        speaker.volume = 1;
     }
 }
