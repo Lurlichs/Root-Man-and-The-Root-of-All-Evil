@@ -30,8 +30,15 @@ public class GameManager : MonoBehaviour
 
     public void FinishStage()
     {
-        currentStage++;
-        UI_Manager.Instance.TurnOnVictoryPanel();
+        if(currentStage < stages.Count)
+        {
+            currentStage++;
+            UI_Manager.Instance.TurnOnVictoryPanel();
+        }
+        else
+        {
+            //UI_Manager.Instance.
+        }
     }
 
     private void DisableAllEnvironments()
