@@ -27,10 +27,14 @@ public class TreeBossController : MonoBehaviour
     public float chanceOfSpit = 0.05f;
     [Tooltip("Chance per idle animation cycle of doing a melee attack")]
     public float chanceOfMelee = 0.05f;
+    [Tooltip("Seconds to lock out spike or root attacks after a spike or root attack")]
+    public float spikeLockout = 5.0f;
 
     private Animator animator;
+    private RootWaveSpawn rootWave;
 
     private States currentState;
+    private float lastSpike;
 
     [Header("Leave Blank if not a boss enemy")]
     [SerializeField] private Bosses_ScriptableObj BossScObj;
@@ -40,6 +44,7 @@ public class TreeBossController : MonoBehaviour
     {
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
+        rootWave = GetComponent<RootWaveSpawn>();
         animator.SetTrigger("StartLaugh");
         // Because the animator is in a child object, we can't get it to call a function here,
         // instead, use AnimationEventsHandler to forward the calls to our AnimationClipEnded method
@@ -57,27 +62,41 @@ public class TreeBossController : MonoBehaviour
     {
     }
 
-    private void AnimationClipEnded(string clipName)
+    // Returns true if a state was chosen, otherwise returns false if you should
+    // try again e.g. due to lockout
+    private bool chooseNewState()
     {
         float randomVar = Random.value;
 
         if (randomVar < chanceOfSpecialIdle)
         {
             animator.SetTrigger("StartSpecial");
+            return true;
         }
         else
         {
             randomVar -= chanceOfSpecialIdle;
             if (randomVar < chanceOfLaugh)
             {
+                if ((Time.fixedTime - lastSpike) < spikeLockout)
+                {
+                    return false; // lockout
+                }
                 animator.SetTrigger("StartLaugh");
+                lastSpike = Time.fixedTime;
             }
             else
             {
                 randomVar -= chanceOfLaugh;
                 if (randomVar < chanceOfSpike)
                 {
+                    if ((Time.fixedTime - lastSpike) < spikeLockout)
+                    {
+                        return false; // lockout
+                    }
                     animator.SetTrigger("StartSpike");
+                    rootWave.Spawn();
+                    lastSpike = Time.fixedTime;
                 }
                 else
                 {
@@ -97,6 +116,17 @@ public class TreeBossController : MonoBehaviour
                 }
             }
         }
+        return true;
+    }
+
+    private void AnimationClipEnded(string clipName)
+    {
+        bool successful;
+
+        do
+        {
+            successful = chooseNewState();
+        } while (!successful);
     }
 
     public void SpikeWave()

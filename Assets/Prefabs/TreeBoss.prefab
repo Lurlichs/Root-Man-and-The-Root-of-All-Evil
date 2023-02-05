@@ -56,9 +56,11 @@ GameObject:
   m_Component:
   - component: {fileID: 23277807649979614}
   - component: {fileID: 23277807649979615}
+  - component: {fileID: 4856363347904904803}
+  - component: {fileID: 3770758557608109406}
   m_Layer: 0
   m_Name: TreeBoss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +101,28 @@ MonoBehaviour:
   chanceOfSpike: 0.1
   chanceOfSpit: 0.1
   chanceOfMelee: 0.1
+  spikeLockout: 8
   BossScObj: {fileID: 0}
+--- !u!114 &4856363347904904803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23277807649979601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3521c8a7ba3c84f40b8970fa11e822fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numRootWaveSpawns: 3
+  initialDelay: 3
+  rootWaveTimeInterval: 0.8
+  rootWaveDistanceMin: 10
+  rootWaveDistanceMax: 15
+  initialDistanceFactor: 1.5
+  rootWavePrefab: {fileID: 4329808208691645257, guid: 74a322c512dbce546aac6550c4eb7c3b,
+    type: 3}
 --- !u!65 &3770758557608109406
 BoxCollider:
   m_ObjectHideFlags: 0
