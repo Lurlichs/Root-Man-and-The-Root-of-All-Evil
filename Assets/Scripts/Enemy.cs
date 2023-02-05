@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         GameObject spawnEffect = Instantiate(deathEffect);
         spawnEffect.transform.position = transform.position;
 
-        UI_Manager.Instance.FadeOutBossBar();
+        //UI_Manager.Instance.FadeOutBossBar();
 
         Destroy(gameObject);
     }

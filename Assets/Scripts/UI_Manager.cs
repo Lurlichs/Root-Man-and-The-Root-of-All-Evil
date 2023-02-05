@@ -143,6 +143,7 @@ public class UI_Manager : MonoBehaviour
     {
         victoryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        FadeOutBossBar();
         gameManager.StartNextStage();
     }
 
