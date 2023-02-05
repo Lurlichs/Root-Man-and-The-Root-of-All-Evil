@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Boss_4
   m_EditorClassIdentifier: 
   id: 4
-  bossName: ONION OF THE IGNOBLE
+  bossName: ONION OF THE OMINOUS
   baseHealth: 40

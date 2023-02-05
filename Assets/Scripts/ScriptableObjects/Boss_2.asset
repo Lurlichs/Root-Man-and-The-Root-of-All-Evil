@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Boss_2
   m_EditorClassIdentifier: 
   id: 2
-  bossName: POTATO OF THE PROHIBITED
+  bossName: POTATOES OF THE PROHIBITED
   baseHealth: 30
