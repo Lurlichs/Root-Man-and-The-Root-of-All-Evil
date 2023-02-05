@@ -121,6 +121,7 @@ MonoBehaviour:
   rootWaveDistanceMin: 10
   rootWaveDistanceMax: 15
   initialDistanceFactor: 1.5
+  isPlayer: 1
   rootWavePrefab: {fileID: 4329808208691645257, guid: 74a322c512dbce546aac6550c4eb7c3b,
     type: 3}
 --- !u!65 &3770758557608109406
