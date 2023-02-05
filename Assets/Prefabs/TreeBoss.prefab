@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 23277807598548146}
   m_Layer: 0
   m_Name: ColliderScaler
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &23277807598548147
 Transform:
   m_ObjectHideFlags: 0
@@ -57,6 +57,8 @@ GameObject:
   - component: {fileID: 23277807649979614}
   - component: {fileID: 23277807649979615}
   - component: {fileID: 4856363347904904803}
+  - component: {fileID: 7708893993313149470}
+  - component: {fileID: 6708470962637682533}
   - component: {fileID: 3770758557608109406}
   m_Layer: 0
   m_Name: TreeBoss
@@ -79,6 +81,7 @@ Transform:
   m_Children:
   - {fileID: 565213263614195373}
   - {fileID: 23277807598548147}
+  - {fileID: 64266113481714498}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,6 +105,10 @@ MonoBehaviour:
   chanceOfSpit: 0.1
   chanceOfMelee: 0.1
   spikeLockout: 8
+  spitLockout: 5
+  meleeStartProportion: 0.41
+  meleeEndProportion: 0.56
+  meleeCollider: {fileID: 2124195473119956845}
   BossScObj: {fileID: 0}
 --- !u!114 &4856363347904904803
 MonoBehaviour:
@@ -121,7 +128,48 @@ MonoBehaviour:
   rootWaveDistanceMin: 10
   rootWaveDistanceMax: 15
   initialDistanceFactor: 1.5
+  isPlayer: 1
   rootWavePrefab: {fileID: 4329808208691645257, guid: 74a322c512dbce546aac6550c4eb7c3b,
+    type: 3}
+--- !u!114 &7708893993313149470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23277807649979601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6608113060153e44b81f998fecb336e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numRootSpikeSpawns: 10
+  initialDelay: 3
+  rootSpikeTimeInterval: 0.3
+  rootSpikeDistance: 4
+  initialDistanceFactor: 3
+  rootSpikePrefab: {fileID: 1396250162364260641, guid: 9a61359e32e7c374a93d60af9344f8fd,
+    type: 3}
+--- !u!114 &6708470962637682533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23277807649979601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb11b1b23e0f194088cd2889a798245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numSpawns: 4
+  initialDelay: 3
+  spawnTimeInterval: 0.2
+  potatoSpeed: 20
+  minAngle: 20
+  maxAngle: 40
+  spawnDisplacement: {x: 0, y: 9, z: 0}
+  potatoPrefab: {fileID: 2702485830317621532, guid: 33a020d0522535c4fb3623ed886cc51e,
     type: 3}
 --- !u!65 &3770758557608109406
 BoxCollider:
@@ -134,8 +182,53 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.904748, y: 13.160121, z: 5.3378067}
-  m_Center: {x: -2.952374, y: 6.0800614, z: 0.9223024}
+  m_Size: {x: 6.14, y: 13.160121, z: 5.3378067}
+  m_Center: {x: -0.79, y: 6.0800614, z: 0.9223024}
+--- !u!1 &6398156130726698676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64266113481714498}
+  - component: {fileID: 2124195473119956845}
+  m_Layer: 0
+  m_Name: MeleeCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64266113481714498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6398156130726698676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.59, y: 5.94, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 23277807649979614}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2124195473119956845
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6398156130726698676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 10, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &23277805880824134
 PrefabInstance:
   m_ObjectHideFlags: 0

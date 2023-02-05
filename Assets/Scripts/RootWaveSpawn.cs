@@ -16,19 +16,20 @@ public class RootWaveSpawn : MonoBehaviour
     public float rootWaveDistanceMax = 15.0f;
     [Tooltip("Factor to apply for distance for first spawn")]
     public float initialDistanceFactor = 1.5f;
+    [Tooltip("Whether this is a player root wave")]
+    public bool isPlayer = false;
 
     [Tooltip("Put root wave prefab object here")]
     public GameObject rootWavePrefab;
 
-    private GameObject[] rootWaves;
-
-    public void Spawn()
+    public void Spawn(bool facingLeft)
     {
-        StartCoroutine("SpawnRoots");
+        StartCoroutine("SpawnRoots", facingLeft);
     }
 
-    IEnumerator SpawnRoots()
+    IEnumerator SpawnRoots(bool facingLeft)
     {
+        GameObject[] rootWaves = new GameObject[numRootWaveSpawns];
         yield return new WaitForSeconds(initialDelay);
         for (int i = 0; i < numRootWaveSpawns; i++)
         {
@@ -51,7 +52,24 @@ public class RootWaveSpawn : MonoBehaviour
             pos += Vector3.left * offset;
             rootWaves[i] = Instantiate(rootWavePrefab, transform);
             rootWaves[i].transform.position = pos;
-            rootWaves[i].transform.right = Vector3.left; // mirror right to left
+            if (facingLeft)
+            {
+                rootWaves[i].transform.right = Vector3.left; // mirror right to left
+            }
+            if (isPlayer)
+            {
+                Collider[] colliders = GetComponentsInChildren<Collider>();
+                foreach (Collider c in colliders)
+                {
+                    // Stop the collider from damaging the player
+                    c.tag = "Untagged";
+                }
+            }
+            DamagesEnemies[] enemyDamagers = GetComponentsInChildren<DamagesEnemies>();
+            foreach (DamagesEnemies damager in enemyDamagers)
+            {
+                damager.DoesDamageEnemies = isPlayer;
+            }
             //Debug.Log("Spawn root wave " + i);
             yield return new WaitForSeconds(rootWaveTimeInterval);
         }
@@ -70,12 +88,10 @@ public class RootWaveSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rootWaves = new GameObject[numRootWaveSpawns];
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
