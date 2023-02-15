@@ -136,9 +136,12 @@ MonoBehaviour:
   rb: {fileID: 2702485830317621521}
   deathEffect: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
+  isBoss: 1
   acceleration: 6
   maximumSpeed: 15
   startRight: 1
+  flyIgnoreCollisions: 0.2
+  isFlying: 0
   BossScObj: {fileID: 11400000, guid: c83f3001b7cd43b47a93b706f0716562, type: 2}
 --- !u!114 &1115046916834302581
 MonoBehaviour:

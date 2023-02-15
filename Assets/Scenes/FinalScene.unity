@@ -1399,7 +1399,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 81c398b7c9e4a6948bb45fd134887bbf,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81c398b7c9e4a6948bb45fd134887bbf,
         type: 3}
@@ -7903,15 +7903,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundtracks:
   - id: 0
-    main: {fileID: 8300000, guid: 3aeead75c4e68304ba02b8245411be0f, type: 3}
+    main: {fileID: 8300000, guid: 37b280720c261924a9a40ce4775cf643, type: 3}
   - id: 1
-    main: {fileID: 8300000, guid: 4b8a0c22c6165c5458e424f09584d71b, type: 3}
+    main: {fileID: 8300000, guid: 994b6f50019a4a448986fb3d7b8b4f71, type: 3}
   - id: 2
-    main: {fileID: 8300000, guid: 0740312906f71194ca45651494ee1254, type: 3}
+    main: {fileID: 8300000, guid: ed113ad78c46c7c4db7eb192a9bfa400, type: 3}
   - id: 3
-    main: {fileID: 8300000, guid: 5f0636048ba411d46acb0e6ad563218d, type: 3}
+    main: {fileID: 8300000, guid: f90ec24d8f7876a419b7a492e9892f30, type: 3}
   - id: 4
-    main: {fileID: 8300000, guid: 25cc5ee080c82074f8ef21c5248edf05, type: 3}
+    main: {fileID: 8300000, guid: e3818a605b6ae8748b2cb6b531f21555, type: 3}
   speaker: {fileID: 457310375}
   player: {fileID: 454267269}
   vol: 0.6

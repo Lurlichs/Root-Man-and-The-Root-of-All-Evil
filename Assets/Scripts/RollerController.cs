@@ -14,7 +14,7 @@ public class RollerController : Enemy
 
     private bool isPositive;
     private float currentVelocity;
-    private Rigidbody rb;
+    private Rigidbody rigb;
     private LookAhead lookahead;
     private Collider myCollider;
     private float whenStartedFlying;
@@ -25,7 +25,7 @@ public class RollerController : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rigb = GetComponent<Rigidbody>();
         lookahead = GetComponent<LookAhead>();
         if (myCollider == null)
         {
@@ -74,8 +74,8 @@ public class RollerController : Enemy
                     currentVelocity -= velocityChange;
                 }
             }
-            rb.velocity = new Vector3(currentVelocity, rb.velocity.y, rb.velocity.z);
-            rb.angularVelocity = new Vector3(0.0f, 0.0f, -currentVelocity);
+            rigb.velocity = new Vector3(currentVelocity, rigb.velocity.y, rigb.velocity.z);
+            rigb.angularVelocity = new Vector3(0.0f, 0.0f, -currentVelocity);
             if (!lookahead.CheckIfCanMoveInFront(transform, isPositive))
             {
                 // Change direction

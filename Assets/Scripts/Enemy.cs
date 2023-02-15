@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] public GameObject deathEffect;
+    [SerializeField] public bool isBoss;
 
         /// <summary>
         /// Use if necessary
@@ -26,7 +27,11 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
         
-        UI_Manager.Instance.UpdateBossHealth(health);
+        if(isBoss == true)
+        {
+            UI_Manager.Instance.UpdateBossHealth(health);
+        }
+       
 
         if (health <= 0)
         {

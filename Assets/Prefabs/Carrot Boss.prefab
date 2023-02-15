@@ -82,6 +82,7 @@ MonoBehaviour:
   rb: {fileID: 8260980253245367833}
   deathEffect: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
+  isBoss: 1
   attackFrequency: 3
   wiggleTime: 2
   preAttackSpeed: 6

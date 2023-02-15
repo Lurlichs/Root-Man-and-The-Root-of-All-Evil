@@ -121,6 +121,7 @@ MonoBehaviour:
   rb: {fileID: 7195456913371833138}
   deathEffect: {fileID: 647739838954711788, guid: e09491246e1671a4bb8cd66c1d277f1a,
     type: 3}
+  isBoss: 1
   spike: {fileID: 1396250162364260641, guid: 9a61359e32e7c374a93d60af9344f8fd, type: 3}
   root: {fileID: 4329808208691645257, guid: 74a322c512dbce546aac6550c4eb7c3b, type: 3}
   chanceOfSpecialIdle: 0.15
@@ -133,7 +134,7 @@ MonoBehaviour:
   meleeStartProportion: 0.41
   meleeEndProportion: 0.56
   meleeCollider: {fileID: 2124195473119956845}
-  BossScObj: {fileID: 0}
+  BossScObj: {fileID: 11400000, guid: 95b0757d36a993540944c6e6614550e0, type: 2}
 --- !u!114 &4856363347904904803
 MonoBehaviour:
   m_ObjectHideFlags: 0

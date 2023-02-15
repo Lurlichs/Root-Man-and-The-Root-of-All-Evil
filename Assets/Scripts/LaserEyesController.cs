@@ -40,7 +40,7 @@ public class LaserEyesController : Enemy
     [Tooltip("Layer mask to use when checking if this enemy can see the player - make sure you exclude Enemy")]
     public LayerMask layerMask;
 
-    private Rigidbody rb;
+    private Rigidbody rigb;
     private Animator animator;
     private LookAhead lookahead;
 
@@ -70,7 +70,7 @@ public class LaserEyesController : Enemy
         {
             player = FindObjectOfType<Player>();
         }
-        rb = GetComponent<Rigidbody>();
+        rigb = GetComponent<Rigidbody>();
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
         lookahead = GetComponent<LookAhead>();
@@ -128,11 +128,11 @@ public class LaserEyesController : Enemy
             }
             if (moveRight)
             {
-                rb.velocity = new Vector3(walkSpeed * runFactor, rb.velocity.y, 0.0f);
+                rigb.velocity = new Vector3(walkSpeed * runFactor, rigb.velocity.y, 0.0f);
             }
             else
             {
-                rb.velocity = new Vector3(-walkSpeed * runFactor, rb.velocity.y, 0.0f);
+                rigb.velocity = new Vector3(-walkSpeed * runFactor, rigb.velocity.y, 0.0f);
             }
             if (CanSeePlayer())
             {
@@ -164,11 +164,11 @@ public class LaserEyesController : Enemy
             animator.speed = runFactor;
             if (moveRight)
             {
-                rb.velocity = new Vector3(walkSpeed * runFactor, rb.velocity.y, 0.0f);
+                rigb.velocity = new Vector3(walkSpeed * runFactor, rigb.velocity.y, 0.0f);
             }
             else
             {
-                rb.velocity = new Vector3(-walkSpeed * runFactor, rb.velocity.y, 0.0f);
+                rigb.velocity = new Vector3(-walkSpeed * runFactor, rigb.velocity.y, 0.0f);
             }
             if (CanSeePlayer())
             {

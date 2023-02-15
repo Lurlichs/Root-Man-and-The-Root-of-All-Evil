@@ -33,9 +33,9 @@ public class MissileController : Enemy
     [Tooltip("How long, in seconds, to ignore collisions for when starting to attack")]
     public float attackColliderBlanking = 0.150f;
 
-    private Rigidbody rb;
+    private Rigidbody rigb;
     private Animator animator;
-    private Collider collider;
+    private Collider objCollider;
 
     private States currentState;
 
@@ -58,10 +58,10 @@ public class MissileController : Enemy
             player = FindObjectOfType<Player>();
         }
 
-        rb = GetComponent<Rigidbody>();
+        rigb = GetComponent<Rigidbody>();
         // The animator is in a child object so we need to use GetComponentInChildren instead of GetComponent
         animator = GetComponentInChildren<Animator>();
-        collider = GetComponent<Collider>();
+        objCollider = GetComponent<Collider>();
         lastStateTransition = Time.fixedTime;
         currentState = States.IDLE;
     }
@@ -113,7 +113,7 @@ public class MissileController : Enemy
         }
         else if (currentState == States.RISING)
         {
-            rb.velocity = new Vector3(0.0f, preAttackSpeed * CalculateBoostFactor(), 0.0f);
+            rigb.velocity = new Vector3(0.0f, preAttackSpeed * CalculateBoostFactor(), 0.0f);
             if (transform.position.y >= preAttackHeight)
             {
                 // Up to required, height, start real attack
@@ -124,30 +124,30 @@ public class MissileController : Enemy
                 currentState = States.ATTACK;
                 // Temporarily disable the collider in case there are nearby
                 // walls blocking the carrot from turning towards the player
-                collider.enabled = false;
+                objCollider.enabled = false;
             }
         }
         else if (currentState == States.ATTACK)
         {
             float boostedAttackSpeed = attackSpeed * CalculateBoostFactor();
-            rb.velocity = new Vector3(Mathf.Cos(attackAngle) * boostedAttackSpeed, Mathf.Sin(attackAngle) * boostedAttackSpeed, 0.0f);
-            if (!collider.enabled && (Time.fixedTime - lastStateTransition >= attackColliderBlanking))
+            rigb.velocity = new Vector3(Mathf.Cos(attackAngle) * boostedAttackSpeed, Mathf.Sin(attackAngle) * boostedAttackSpeed, 0.0f);
+            if (!objCollider.enabled && (Time.fixedTime - lastStateTransition >= attackColliderBlanking))
             {
                 // Re-enable collider as its been long enough for the carrot to travel
                 // enough to clear nearby walls
-                collider.enabled = true;
+                objCollider.enabled = true;
             }
         }
         // Lock z position
         if (currentState == States.RISING)
         {
             // Point in opposite of direction of travel
-            transform.right = -rb.velocity.normalized;
+            transform.right = -rigb.velocity.normalized;
         }
         else if (currentState == States.ATTACK)
         {
             // Point in direction of travel
-            transform.right = rb.velocity.normalized;
+            transform.right = rigb.velocity.normalized;
         }
     }
 
@@ -158,8 +158,8 @@ public class MissileController : Enemy
             // Stop attacking
             animator.ResetTrigger("StartFlying");
             animator.SetTrigger("StopFlying");
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            rigb.velocity = Vector3.zero;
+            rigb.angularVelocity = Vector3.zero;
             transform.right = Vector3.down; // plant into ground
             lastStateTransition = Time.fixedTime;
             currentState = States.IDLE;
