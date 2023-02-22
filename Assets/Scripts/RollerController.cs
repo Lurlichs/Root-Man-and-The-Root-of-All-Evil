@@ -21,6 +21,7 @@ public class RollerController : Enemy
 
     [Header("Leave Blank if not a boss enemy")]
     [SerializeField] private Bosses_ScriptableObj BossScObj;
+    public AudioSource potatoAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,10 @@ public class RollerController : Enemy
         {
             UI_Manager.Instance.SetBossHealthBar(BossScObj, health);
         }
+
+        float delay = Random.Range(0, 3);
+
+        potatoAudio.PlayDelayed(delay);
     }
 
     // Have the roller fly freely
@@ -63,6 +68,7 @@ public class RollerController : Enemy
         {
             // Accelerate up to maximum speed in the chosen direction
             float velocityChange = acceleration * Time.fixedDeltaTime;
+           
             if (Mathf.Abs(currentVelocity) < maximumSpeed)
             {
                 if (isPositive)

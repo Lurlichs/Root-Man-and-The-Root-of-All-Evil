@@ -45,6 +45,9 @@ public class MissileController : Enemy
 
     [Header("Leave Blank if not a boss enemy")]
     [SerializeField] private Bosses_ScriptableObj BossScObj;
+    public AudioSource carrotAudio;
+    public AudioClip upAudio;
+    public AudioClip attackAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -126,6 +129,8 @@ public class MissileController : Enemy
                 // walls blocking the carrot from turning towards the player
                 objCollider.enabled = false;
             }
+            carrotAudio.clip = upAudio;
+            carrotAudio.Play();
         }
         else if (currentState == States.ATTACK)
         {
@@ -137,6 +142,8 @@ public class MissileController : Enemy
                 // enough to clear nearby walls
                 objCollider.enabled = true;
             }
+            carrotAudio.clip = attackAudio;
+            carrotAudio.Play();
         }
         // Lock z position
         if (currentState == States.RISING)

@@ -445,6 +445,189 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564838220}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &966696751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 966696754}
+  - component: {fileID: 966696753}
+  - component: {fileID: 966696752}
+  m_Layer: 0
+  m_Name: AudioController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &966696752
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966696751}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &966696753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966696751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ba5f9e0b1c73447a179171044054a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - audioClip: {fileID: 8300000, guid: 73bcaceb751a7184dab92af3bb8945ee, type: 3}
+    alias: playerHit
+  - audioClip: {fileID: 8300000, guid: dbcb1d91e36d4c14882c9f8c5a0df1b1, type: 3}
+    alias: jump
+  - audioClip: {fileID: 8300000, guid: 3dad93b5db483f74193485b04bfa27f3, type: 3}
+    alias: landing
+  - audioClip: {fileID: 8300000, guid: 5bfdbd6bb3a1c9747b23e5dbf766bb93, type: 3}
+    alias: projectile
+  - audioClip: {fileID: 8300000, guid: 85bee73efd6b1e648a5205522ed1beee, type: 3}
+    alias: shieldActive
+  - audioClip: {fileID: 8300000, guid: 34667e4448cfbca4198a85fe5807d96d, type: 3}
+    alias: shieldBlock
+  - audioClip: {fileID: 8300000, guid: 4bedf018e8514e544bb930023cdb2030, type: 3}
+    alias: shieldDeactivate
+  - audioClip: {fileID: 8300000, guid: 3dbd6c207e4681843a00e5e4c08f11fa, type: 3}
+    alias: enemyHit
+  - audioClip: {fileID: 8300000, guid: c3a5f6a6e2cbd9b4290086287ca97664, type: 3}
+    alias: click
+  - audioClip: {fileID: 8300000, guid: df350745ff1f7a94e980c262089a67f6, type: 3}
+    alias: death
+  - audioClip: {fileID: 8300000, guid: 0d699ddebddc7ce468b44135c6d7f469, type: 3}
+    alias: enemyDeath
+  - audioClip: {fileID: 8300000, guid: 13156afdaa8c9f34b973885939ec7d23, type: 3}
+    alias: rootWave
+  - audioClip: {fileID: 8300000, guid: 8d5961200b9c2f0448fdce919bd582d0, type: 3}
+    alias: melee
+  - audioClip: {fileID: 8300000, guid: 6203f0740b38da446a480b035bc8cfa0, type: 3}
+    alias: victory
+  - audioClip: {fileID: 8300000, guid: 373b3723be493cc469461da4d44a9f53, type: 3}
+    alias: bosslaugh
+  - audioClip: {fileID: 8300000, guid: c1d01599e94dcc24ebab32d3c572e20a, type: 3}
+    alias: bossshake
+  - audioClip: {fileID: 8300000, guid: 6d03f781d16039d45a7f425cbc40a55a, type: 3}
+    alias: bossspit
+  - audioClip: {fileID: 0}
+    alias: 
+  - audioClip: {fileID: 8300000, guid: c9a301fe4f40f084189f7afc0dbf55a1, type: 3}
+    alias: bossspike
+  - audioClip: {fileID: 0}
+    alias: 
+  speaker: {fileID: 966696752}
+--- !u!4 &966696754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966696751}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1369586154
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,27 +955,27 @@ PrefabInstance:
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfSpit
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfLaugh
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfMelee
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfSpike
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 23277807649979615, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}
       propertyPath: chanceOfSpecialIdle
-      value: 0
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1107897357665298954, guid: 8d1a5c0cb9ffa9c4fb6011fd611520e5,
         type: 3}

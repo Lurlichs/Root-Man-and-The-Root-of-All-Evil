@@ -33,6 +33,7 @@ public class PotatoSpammer : MonoBehaviour
         yield return new WaitForSeconds(initialDelay);
         StageController sc = FindObjectOfType<StageController>();
         Player myPlayer = FindObjectOfType<Player>();
+        AudioPlayer.Instance.PlayClip("bossspit", 1, true);
         for (int i = 0; i < numSpawns; i++)
         {
             GameObject g = Instantiate(potatoPrefab, transform);

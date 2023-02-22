@@ -62,6 +62,7 @@ public class TreeBossController : Enemy
         potatoSpammer = GetComponent<PotatoSpammer>();
         meleeCollider.enabled = false;
         animator.SetTrigger("StartLaugh");
+        AudioPlayer.Instance.PlayClip("bosslaugh", 1, true);
         // Because the animator is in a child object, we can't get it to call a function here,
         // instead, use AnimationEventsHandler to forward the calls to our AnimationClipEnded method
         GetComponentInChildren<AnimationEventsHandler>().AddAnimationClipEndCallback(AnimationClipEnded);
@@ -135,6 +136,7 @@ public class TreeBossController : Enemy
                         {
                             animator.SetTrigger("StartMelee");
                             meleeCollider.enabled = false;
+                            isMeleeAudioPlay = false;
                         }
                     }
                 }
@@ -149,6 +151,7 @@ public class TreeBossController : Enemy
         AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0);
         if (animState.IsName("TreeCloseAttack"))
         {
+            playMeleeAudio();
             if (!meleeCollider.enabled && (animState.normalizedTime >= meleeStartProportion))
             {
                 meleeCollider.enabled = true;
@@ -168,5 +171,17 @@ public class TreeBossController : Enemy
         {
             successful = chooseNewState();
         } while (!successful);
+    }
+
+    private bool isMeleeAudioPlay;
+
+    public void playMeleeAudio()
+    {
+        if (isMeleeAudioPlay == false)
+        {
+            AudioPlayer.Instance.PlayClip("bossshake", 1, true);
+            isMeleeAudioPlay = true;
+        }
+        
     }
 }

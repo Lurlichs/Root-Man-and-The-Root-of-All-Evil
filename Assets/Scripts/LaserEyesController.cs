@@ -57,6 +57,9 @@ public class LaserEyesController : Enemy
 
     [Header("Leave Blank if not a boss enemy")]
     [SerializeField] private Bosses_ScriptableObj BossScObj;
+    public AudioSource onionAudio;
+    public AudioClip walkAudio;
+    public AudioClip laserAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +85,9 @@ public class LaserEyesController : Enemy
         moveRight = Random.Range(0, 2) < 1;
         UpdateMoveDirection();
         animator.SetTrigger("StartWalking");
+        onionAudio.clip = walkAudio;
+        onionAudio.loop = true;
+        onionAudio.Play();
     }
 
     private void UpdateMoveDirection()
@@ -179,6 +185,7 @@ public class LaserEyesController : Enemy
                     // Player is at the same level, attack!
                     animator.ResetTrigger("StartWalking");
                     animator.SetTrigger("StartAttack");
+                    onionAudio.Stop();
                     laserOn = false;
                     lastStateTransition = Time.fixedTime;
                     currentState = States.ATTACK;
@@ -212,6 +219,10 @@ public class LaserEyesController : Enemy
             {
                 laserBeam = Instantiate(laserBeamPrefab, onionEye);
                 laserOn = true;
+                onionAudio.clip = laserAudio;
+                onionAudio.loop = false;
+                onionAudio.Play();
+                walkAudioPlay = true;
             }
             if (laserOn && (animState.normalizedTime >= laserOffTime))
             {
@@ -235,9 +246,20 @@ public class LaserEyesController : Enemy
         transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
     }
 
+    private bool walkAudioPlay;
+
     // Update is called once per frame
     void Update()
     {
-        
+        if(currentState == States.PATROL || currentState == States.AVOID)
+        {
+            if(walkAudioPlay == true)
+            {
+                onionAudio.clip = walkAudio;
+                onionAudio.loop = true;
+                onionAudio.Play();
+                walkAudioPlay = false;
+            }
+        }
     }
 }

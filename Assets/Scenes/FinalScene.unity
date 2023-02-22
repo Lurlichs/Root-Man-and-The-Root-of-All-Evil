@@ -740,18 +740,18 @@ MonoBehaviour:
     alias: rootWave
   - audioClip: {fileID: 8300000, guid: 8d5961200b9c2f0448fdce919bd582d0, type: 3}
     alias: melee
+  - audioClip: {fileID: 8300000, guid: 6203f0740b38da446a480b035bc8cfa0, type: 3}
+    alias: victory
+  - audioClip: {fileID: 8300000, guid: 373b3723be493cc469461da4d44a9f53, type: 3}
+    alias: bosslaugh
+  - audioClip: {fileID: 8300000, guid: c1d01599e94dcc24ebab32d3c572e20a, type: 3}
+    alias: bossshake
+  - audioClip: {fileID: 8300000, guid: 6d03f781d16039d45a7f425cbc40a55a, type: 3}
+    alias: bossspit
   - audioClip: {fileID: 0}
     alias: 
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
-  - audioClip: {fileID: 0}
-    alias: 
+  - audioClip: {fileID: 8300000, guid: c9a301fe4f40f084189f7afc0dbf55a1, type: 3}
+    alias: bossspike
   - audioClip: {fileID: 0}
     alias: 
   speaker: {fileID: 57934318}
@@ -7665,6 +7665,7 @@ GameObject:
   - component: {fileID: 454267270}
   - component: {fileID: 454267269}
   - component: {fileID: 454267268}
+  - component: {fileID: 454267275}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7856,6 +7857,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &454267275
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454267267}
+  m_Enabled: 1
 --- !u!1 &457310372
 GameObject:
   m_ObjectHideFlags: 0
@@ -17365,7 +17374,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1700168258}
   - component: {fileID: 1700168257}
-  - component: {fileID: 1700168256}
   - component: {fileID: 1700168255}
   - component: {fileID: 1700168254}
   m_Layer: 0
@@ -17442,14 +17450,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &1700168256
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700168253}
-  m_Enabled: 1
 --- !u!20 &1700168257
 Camera:
   m_ObjectHideFlags: 0

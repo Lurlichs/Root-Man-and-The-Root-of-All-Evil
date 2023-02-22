@@ -139,6 +139,7 @@ public class UI_Manager : MonoBehaviour
     public void TurnOnVictoryPanel()
     {
         victoryPanel.SetActive(true);
+        AudioPlayer.Instance.PlayClip("victory");
         Cursor.lockState = CursorLockMode.None;
     }
     public void TurnOffVictoryPanel()

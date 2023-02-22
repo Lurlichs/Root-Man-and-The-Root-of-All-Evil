@@ -26,6 +26,7 @@ public class RootSpikeSpawn : MonoBehaviour
     IEnumerator SpawnSpikes()
     {
         GameObject[] rootSpikes = new GameObject[numRootSpikeSpawns];
+        AudioPlayer.Instance.PlayClip("bosslaugh", 1, true);
         yield return new WaitForSeconds(initialDelay);
         for (int i = 0; i < numRootSpikeSpawns; i++)
         {

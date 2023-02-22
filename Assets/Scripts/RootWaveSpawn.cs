@@ -25,6 +25,7 @@ public class RootWaveSpawn : MonoBehaviour
     public void Spawn(bool facingLeft)
     {
         StartCoroutine("SpawnRoots", facingLeft);
+        AudioPlayer.Instance.PlayClip("bossspike", 1, true);
     }
 
     IEnumerator SpawnRoots(bool facingLeft)
