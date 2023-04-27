@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            if(transform.position.y > 25)
+            if(transform.position.y > 100)
             {
                 Die();
             }
