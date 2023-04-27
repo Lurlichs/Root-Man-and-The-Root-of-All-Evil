@@ -19,14 +19,17 @@ public class Controls : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.D))
                 {
-                    playerController.MoveDirection(false, Time.deltaTime);
+                    playerController.MoveDirection(Move.Right);
                     playerController.pressingWalk = true;
                 }
-
-                if (Input.GetKey(KeyCode.A))
+                else if (Input.GetKey(KeyCode.A))
                 {
-                    playerController.MoveDirection(true, Time.deltaTime);
+                    playerController.MoveDirection(Move.Left);
                     playerController.pressingWalk = true;
+                }
+                else
+                {
+                    playerController.MoveDirection(Move.Stop);
                 }
 
                 if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))

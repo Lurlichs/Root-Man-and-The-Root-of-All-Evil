@@ -31,6 +31,13 @@ public enum PlayerState
     ShootingFalling
 }
 
+public enum Move
+{
+    Left,
+    Right,
+    Stop
+}
+
 public class Player : MonoBehaviour
 {
     [Header("Modifyable Constants")]
@@ -323,19 +330,23 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void MoveDirection(bool left, float deltaTime)
+    public void MoveDirection(Move move)
     {
-        if (left)
+        if (move == Move.Left)
         {
             facingLeft = true;
-            transform.position = new Vector3(transform.position.x - currentSpeed * deltaTime, transform.position.y);
+            rb.velocity = new Vector3(-currentSpeed, rb.velocity.y);
             playerMesh.transform.localScale = new Vector3(1, 1, -1);
         }
-        else
+        else if(move == Move.Right)
         {
             facingLeft = false;
-            transform.position = new Vector3(transform.position.x + currentSpeed * deltaTime, transform.position.y);
+            rb.velocity = new Vector3(currentSpeed, rb.velocity.y);
             playerMesh.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if(move == Move.Stop)
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y);
         }
 
         if (grounded)
