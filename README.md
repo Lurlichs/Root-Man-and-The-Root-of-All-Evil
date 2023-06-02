@@ -1,4 +1,4 @@
-# GlobalGameJam2023
+# Root Man and the Root of All Evil
 This project is made during [Melbourne Global Game Jam 2023](https://globalgamejam.org/2023/jam-sites/melbourne-global-game-jam-2023) within 2 days with the theme of "Roots".
 The game is a simple reverse-progression game where you play as an initially overpowered hero that loses his powers as he progresses. Beat up vegetables and progress your way to defeat the Root of all Evil!
 
@@ -35,6 +35,10 @@ There are various different enemies:
 * Onions
 * Carrots
 * Various bosses!
+
+### How to run
+
+This project uses Unity 2021.3.1f1. There are no external dependencies required.
 
 ## Credits
 
